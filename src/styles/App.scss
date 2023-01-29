@@ -1,0 +1,215 @@
+@import "libs/var";
+@import "libs/margins";
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app {
+  //   background-color: $primary;
+
+  .main {
+    min-width: 320px;
+    min-height: calc(100vh - 12rem);
+    // background: red;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    margin: 0;
+  }
+}
+
+.icon {
+  width: 1.4em;
+  height: 1.4em;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.currencies {
+  display: flex;
+}
+
+.currency {
+  margin: 0 2rem;
+  border-radius: $radius;
+  border: 1px solid $secondary;
+  background: #1a1a1a;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.flat {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.currency-icon {
+  @extend .icon;
+}
+
+button {
+  &.big {
+    font-size: 1.5rem;
+  }
+
+  & .secondary-line {
+    color: $text-light;
+    font-size: 0.8em;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 8rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border-radius: $radius;
+  background-color: $dark-light;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+// INVENTORY
+
+.inventory {
+  display: flex;
+
+  .inventory-card {
+    @extend .card;
+    width: 50%;
+    margin-top: 4rem;
+  }
+}
+
+// .inventory-card-title {
+//   @extend h2;
+// }
+
+.inventory-active-items {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.inventory-item {
+  // padding: 0.5rem;
+
+  @include inventory-item-colors;
+  display: flex;
+  height: 80px;
+  width: 80px;
+
+  overflow: hidden;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.inventory-table {
+  max-height: 340px;
+  overflow: scroll;
+}
+
+.inventory-item-selector {
+  display: flex;
+  gap: 2rem;
+}
+
+.inventory-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 60%;
+}
+
+.item-selector {
+  display: flex;
+  width: 40%;
+  justify-content: center;
+  border-left: 1px solid rgba($dark, 0.6);
+
+  img {
+    width: 64px;
+  }
+
+  .item-image {
+    @include inventory-item-colors;
+    width: 64px;
+    border-width: 3px !important;
+  }
+}
+
+.item-selector-placeholder {
+  text-align: center;
+}
+
+@for $i from 0 through 4 {
+  .border-rarity-#{$i} {
+    border-color: map-get($map: $rarity-colors, $key: $i);
+  }
+}
+
+// END INVENTORY
+
+.td-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  img {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+table {
+  padding: 1rem;
+  background-color: $dark;
+  border-radius: $radius;
+  width: 100%;
+  thead {
+    th {
+      padding: 1rem 0;
+    }
+  }
+  th,
+  td {
+    padding: 0.25rem 0.5rem;
+  }
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: lighten($dark, 3);
+    }
+  }
+}
+
+@for $i from 0 through 4 {
+  .rarity-#{$i} {
+    border-style: solid;
+    border-width: 5px;
+    border-color: map-get($map: $rarity-colors, $key: $i) !important;
+    box-shadow: 0 0 90px calc(10px + (#{$i}px * 3)) map-get($map: $rarity-colors, $key: $i);
+  }
+}

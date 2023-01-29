@@ -1,0 +1,37 @@
+$primary: #ccc;
+$secondary: #646cff;
+$text: #fff;
+$text-light: darken($text, 20);
+$dark: rgb(29, 29, 29);
+$dark-light: lighten($dark, 10);
+$radius: 8px;
+$transition-duration: 0.25s;
+
+// Alerts colors
+$success: rgb(185, 255, 192);
+$error: rgb(255, 176, 176);
+$info: rgb(170, 217, 255);
+$warning: rgb(255, 233, 182);
+
+// Rarity Colors
+$rarity-colors: (
+  0: rgb(207, 207, 207),
+  1: rgb(175, 255, 171),
+  2: rgb(91, 124, 255),
+  3: rgb(219, 91, 255),
+  4: rgb(255, 176, 91),
+);
+
+@mixin inventory-item-colors {
+  background-color: $dark;
+  border-radius: $radius;
+  cursor: pointer;
+  border: 3px solid $secondary;
+  transition: all $transition-duration;
+
+  &:hover {
+    background-color: darken($dark, 3);
+    border-color: lighten($secondary, 5);
+    transition: all $transition-duration;
+  }
+}

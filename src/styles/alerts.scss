@@ -1,0 +1,27 @@
+@import "libs/var";
+
+$alert-types: success $success, error $error, info $info, warning $warning;
+
+.alert {
+  width: 100%;
+  margin: 2rem auto;
+
+  padding: 0.5rem 1rem;
+  border-radius: $radius;
+  box-sizing: border-box;
+  color: $dark;
+
+  .alert-title {
+    font-weight: bold;
+  }
+
+  &:first-child {
+    margin-top: 0rem;
+  }
+}
+
+@each $types in $alert-types {
+  .#{nth($types, 1)} {
+    background-color: #{nth($types, 2)};
+  }
+}

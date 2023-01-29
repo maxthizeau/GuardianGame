@@ -1,0 +1,75 @@
+@import "libs/var";
+
+$box-width: 300px;
+$box-width-focused: calc($box-width * 1.1);
+
+.clickable-lootbox {
+  border-radius: $radius;
+  //   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  width: $box-width-focused;
+  height: $box-width-focused;
+  margin: auto;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  & img {
+    transition: all 0.3s;
+    width: $box-width;
+    height: $box-width;
+    border-radius: $radius;
+  }
+
+  &:hover {
+    img {
+      width: $box-width-focused;
+      height: $box-width-focused;
+      box-shadow: 0 0 60px 15px #0e0c3b, 0 0 100px 30px #631f83, 0 0 140px 45px rgb(74, 204, 204);
+    }
+  }
+}
+
+.active-lootbox {
+  border-radius: $radius;
+  //   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  width: $box-width;
+  height: $box-width;
+  margin: auto;
+  margin-bottom: 2rem;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  & img {
+    transition: all 0.3s;
+    width: $box-width;
+    height: $box-width;
+  }
+}
+
+.drawing {
+  filter: grayscale(1);
+}
+
+.drawing-container {
+  border: 5px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.item-won {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.collect-label {
+  font-weight: bold;
+  margin: 1rem 0;
+}

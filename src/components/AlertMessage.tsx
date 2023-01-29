@@ -1,0 +1,19 @@
+import { FC, ReactNode } from "react"
+import "../styles/alerts.scss"
+
+interface IProps {
+  type: "success" | "error" | "info" | "warning"
+  title?: string
+  message: string
+}
+
+const AlertMessage: FC<IProps> = ({ type, title, message }) => {
+  return (
+    <div className={`alert ${type}`}>
+      {title && <div className="alert-title">{title}</div>}
+      {message}
+    </div>
+  )
+}
+
+export default AlertMessage

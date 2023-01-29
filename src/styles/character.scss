@@ -1,0 +1,53 @@
+@import "libs/var";
+
+.character-card {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  img {
+    width: 100%;
+  }
+}
+
+.character-left {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 2rem;
+}
+
+.character-stuff {
+  width: 100%;
+  display: flex;
+
+  justify-content: space-evenly;
+
+  .item-slot {
+    @include inventory-item-colors;
+    width: 25%;
+    overflow: hidden;
+    & img {
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.character-main {
+  width: 80%;
+  margin: 0 auto;
+
+  .character-main-image {
+    border-radius: $radius;
+    // Remove border width
+    width: calc(100% - 10px);
+    // Remove box shadow that is inside rarity-$i class
+    box-shadow: none !important;
+    margin-bottom: 2rem;
+  }
+}
+
+.character-stats table img {
+  width: 120px;
+}
