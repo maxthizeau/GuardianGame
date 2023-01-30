@@ -24,8 +24,8 @@ const LootboxView: FC<IProps> = ({ lootbox }) => {
   const money = useAppSelector((state) => state.inventory.money)
   const [drawing, setDrawing] = useState<{ active: boolean; itemWon?: InventoryItem }>({ active: false, itemWon: undefined })
 
-  // Shuffle on render so animation get different everytime
-  const itemsArray = shuffleArray(lootbox.data)
+  // Shuffle on render so animation get different everytime (json stuff is to make a hard copy)
+  const itemsArray = shuffleArray(JSON.parse(JSON.stringify(lootbox.data)))
 
   function startDrawing(itemWon: InventoryItem) {
     setDrawing({ active: true, itemWon })

@@ -5,14 +5,15 @@ import guardians from "../data/guardians"
 import items from "../data/items"
 import Actions from "../layouts/Actions"
 import { InventoryItem } from "../data/types"
-import { useAppSelector } from "../redux/store"
+import { useAppSelector, useAppDispatch } from "../redux/store"
+import { appActions, EViews } from "../redux/slices/appSlice"
 
 interface IProps {
   // children: ReactNode
-  setCharacterView: () => void
 }
 
-const HomeView: FC<IProps> = ({ setCharacterView }) => {
+const HomeView: FC<IProps> = ({}) => {
+  const dispatch = useAppDispatch()
   const inventory = useAppSelector((state) => state.inventory)
   return (
     <>
@@ -24,7 +25,7 @@ const HomeView: FC<IProps> = ({ setCharacterView }) => {
         <InventoryCard
           title="Characters"
           onClickItem={(char: InventoryItem) => {
-            setCharacterView()
+            dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char }))
           }}
           activeItems={[characters[0]]}
           tableItems={inventory.characters}
