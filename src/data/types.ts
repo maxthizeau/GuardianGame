@@ -24,9 +24,13 @@ export interface Item extends InventoryItem {
   type: ItemType
 }
 
-export interface Guardian extends InventoryItem {}
+export interface Guardian extends InventoryItem {
+  stats?: number
+}
 
-export interface Character extends InventoryItem {}
+export interface Character extends InventoryItem {
+  stats?: number
+}
 
 export enum LootboxType {
   GUARDIANS,
@@ -35,9 +39,10 @@ export enum LootboxType {
 }
 
 export interface Lootbox {
+  id: number
   type: LootboxType
   image: string
   name: string
   cost: number
-  data: InventoryItem[]
+  data: (Guardian | Character | Item)[]
 }
