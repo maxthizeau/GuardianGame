@@ -5,14 +5,17 @@ import Currency from "../components/Currency"
 import items from "../data/items"
 import { InventoryItem } from "../data/types"
 import { shuffleArray } from "../libs/utils"
+import { useAppDispatch } from "../redux/store"
 import "../styles/lootbox.scss"
+import { inventoryActions } from "../redux/slices/inventorySlice"
 
 // Constant : Increase to make animation longer
 const ANIMATION_STEPS_COUNT = 10
 
 interface ILootboxDrawProps {
   active: boolean
-  setActive: (arg: boolean) => void
+  itemWon?: InventoryItem
+  close: () => void
   itemsArray: InventoryItem[]
 }
 
@@ -32,37 +35,12 @@ const getAnimationState = (state: number) => {
   }
 }
 
-const LootboxDraw: FC<ILootboxDrawProps> = ({ active, setActive, itemsArray }) => {
-  // Item won is defined at draw time
-  const [itemWon, setItemWon] = useState<InventoryItem | undefined>(undefined)
-  //   const [active, setActive] = useState(false)
+const LootboxDraw: FC<ILootboxDrawProps> = ({ active, close, itemsArray, itemWon }) => {
   //  How animationStep works :
   // <= -1 : not started
   // > ANIMATION_STEPS_COUNT : finished
   // otherwise : active
   const [animationStep, setAnimationStep] = useState(-1)
-
-  const draw = () => {
-    // // Active = display
-    // setActive(true)
-
-    // Start animation by setting it to 0
-    setAnimationStep(0)
-    let tmpArray: number[] = []
-
-    // Fill the rarity table with possible loot (item id)
-    itemsArray.map((x) => {
-      for (let i = 0; i < 10 - x.rarity * 2; i++) {
-        tmpArray.push(x.id)
-      }
-    })
-
-    // Select a random index of tmpArray. The value at this index is id of item won
-    const idDrawn = tmpArray[Math.floor(Math.random() * tmpArray.length)]
-
-    // Set the item user get
-    setItemWon(itemsArray.find((x) => x.id == idDrawn))
-  }
 
   useEffect(() => {
     // If animationStep has been updated, active, and interval has not been started yet :
@@ -70,7 +48,7 @@ const LootboxDraw: FC<ILootboxDrawProps> = ({ active, setActive, itemsArray }) =
     if (getAnimationState(animationStep) == AnimationState.ACTIVE) {
       const intervalId = setInterval(() => {
         // What to do every interval : increment animation step
-        setAnimationStep(animationStep + 1)
+        setAnimationStep((prevState) => prevState + 1)
       }, 700)
 
       // Important : clear interval after
@@ -82,15 +60,19 @@ const LootboxDraw: FC<ILootboxDrawProps> = ({ active, setActive, itemsArray }) =
 
   useEffect(() => {
     // When switching from unactive to active, start draw.
-    if (active && getAnimationState(animationStep) == AnimationState.NOT_STARTED) {
-      draw()
+    if (itemWon && getAnimationState(animationStep) == AnimationState.NOT_STARTED) {
+      // Start animation by setting it to zero
+      setAnimationStep(0)
     }
-  }, [active])
+  }, [])
 
   // Get values every render
   const animationState = getAnimationState(animationStep)
   const itemToShow = animationState == AnimationState.FINISHED ? itemWon : itemsArray[animationStep % itemsArray.length]
 
+  if (!itemWon) {
+    return null
+  }
   return (
     <>
       <div className={`active-lootbox`}>
@@ -100,7 +82,7 @@ const LootboxDraw: FC<ILootboxDrawProps> = ({ active, setActive, itemsArray }) =
       </div>
       <button
         onClick={() => {
-          active ? setActive(false) : draw()
+          active && close()
         }}
         disabled={animationState == AnimationState.ACTIVE}
       >

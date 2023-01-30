@@ -15,10 +15,10 @@ const InventoryList: FC<IProps> = ({ title, items }) => {
     <div className="inventory-item-selector">
       <div className="inventory-list">
         {items
-          .sort((a, b) => a.rarity - b.rarity)
-          .map((item) => {
+          // .sort((a, b) => a.rarity - b.rarity)
+          .map((item, index) => {
             return (
-              <div onClick={() => setSelectedItem(item)} key={`list-${slugify(title)}-${item.id}}`} className={`inventory-item border-rarity-${item.rarity}`}>
+              <div onClick={() => setSelectedItem(item)} key={`list-${slugify(title)}-${index}}`} className={`inventory-item border-rarity-${item.rarity}`}>
                 <img src={item.image} />
               </div>
             )

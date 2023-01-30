@@ -5,6 +5,7 @@ import guardians from "./guardians"
 import characters from "./characters"
 const lootboxes: Lootbox[] = [
   {
+    id: 1,
     type: LootboxType.ITEMS,
     image: Lootbox2,
     name: "Items Lootbox",
@@ -12,6 +13,7 @@ const lootboxes: Lootbox[] = [
     data: items,
   },
   {
+    id: 2,
     type: LootboxType.GUARDIANS,
     image: Lootbox3,
     name: "Guardians Lootbox",
@@ -19,6 +21,7 @@ const lootboxes: Lootbox[] = [
     data: guardians,
   },
   {
+    id: 3,
     type: LootboxType.CHARACTERS,
     image: Lootbox4,
     name: "Characters Lootbox",
