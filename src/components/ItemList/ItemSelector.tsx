@@ -3,7 +3,7 @@ import { InventoryItem, Item } from "../../data/types"
 import PlaceholderImage from "../../assets/placeholder.png"
 
 interface IProps {
-  itemSelected?: InventoryItem
+  itemSelected?: Item
 }
 
 const ItemSelector: FC<IProps> = ({ itemSelected }) => {
@@ -26,19 +26,19 @@ const ItemSelector: FC<IProps> = ({ itemSelected }) => {
               <td>
                 <b>Vitality</b>
               </td>
-              <td>920</td>
+              <td>{itemSelected.statistics.vitality}</td>
             </tr>
             <tr>
               <td>
                 <b>Strength</b>
               </td>
-              <td>122</td>
+              <td>{itemSelected.statistics.strength}</td>
             </tr>
             <tr>
               <td>
                 <b>Intelligence</b>
               </td>
-              <td>92</td>
+              <td>{itemSelected.statistics.intelligence}</td>
             </tr>
             <tr>
               <td>

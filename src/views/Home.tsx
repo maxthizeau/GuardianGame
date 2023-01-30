@@ -2,11 +2,10 @@ import { FC, ReactNode } from "react"
 import InventoryCard from "../components/InventoryCard"
 import characters from "../data/characters"
 import guardians from "../data/guardians"
-import items from "../data/items"
-import Actions from "../layouts/Actions"
 import { InventoryItem } from "../data/types"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { appActions, EViews } from "../redux/slices/appSlice"
+import ItemCard from "../components/ItemCard"
 
 interface IProps {
   // children: ReactNode
@@ -34,7 +33,7 @@ const HomeView: FC<IProps> = ({}) => {
       </div>
       {/* End Inventory */}
       <div className="card">
-        <InventoryCard type="list" title="Items" activeItems={[]} tableItems={inventory.items} maximumActiveItemsCount={0} />
+        <ItemCard title="Items" items={inventory.items} />
       </div>
     </>
   )

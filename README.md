@@ -19,7 +19,7 @@ Stack :
 
 ## Documentation :
 
-Project structure :
+**Project structure :**
 
 - 📁 src
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 assets (images, font)
@@ -29,6 +29,11 @@ Project structure :
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 libs (library config and utility files)
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 styles (scss files)
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 views (App views)
+
+**Types explanation :**
+
+- InventoryItem : Any lootable thing - Can be item, guardian or character. ItemType is specified as "type" prop
+- Statistic & StatisticRange : An InventoryItem will have random statistics given by his StatisticRange (min, max) value.
 
 ## Images
 

@@ -1,14 +1,19 @@
 import * as Items from "../assets/items"
-import { Item, ItemType, Rarity } from "./types"
+import { InventoryItem, Item, ItemType, Rarity } from "./types"
 
-const items: Item[] = [
+const items: InventoryItem[] = [
   {
-    id: 0,
+    id: 1,
     name: "Ring",
     image: Items.Ring1,
     powerValue: 200,
     type: ItemType.RING,
     rarity: Rarity.COMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 2,
@@ -17,6 +22,11 @@ const items: Item[] = [
     powerValue: 250,
     type: ItemType.RING,
     rarity: Rarity.COMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 3,
@@ -25,6 +35,11 @@ const items: Item[] = [
     powerValue: 300,
     type: ItemType.RING,
     rarity: Rarity.UNCOMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 4,
@@ -33,6 +48,11 @@ const items: Item[] = [
     powerValue: 320,
     type: ItemType.RING,
     rarity: Rarity.UNCOMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 5,
@@ -41,6 +61,11 @@ const items: Item[] = [
     powerValue: 340,
     type: ItemType.RING,
     rarity: Rarity.UNCOMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 6,
@@ -49,6 +74,11 @@ const items: Item[] = [
     powerValue: 400,
     type: ItemType.RING,
     rarity: Rarity.RARE,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 7,
@@ -57,6 +87,11 @@ const items: Item[] = [
     powerValue: 425,
     type: ItemType.RING,
     rarity: Rarity.RARE,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 8,
@@ -65,6 +100,11 @@ const items: Item[] = [
     powerValue: 500,
     type: ItemType.RING,
     rarity: Rarity.EPIC,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 9,
@@ -73,6 +113,11 @@ const items: Item[] = [
     powerValue: 550,
     type: ItemType.RING,
     rarity: Rarity.EPIC,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 10,
@@ -81,6 +126,11 @@ const items: Item[] = [
     powerValue: 800,
     type: ItemType.RING,
     rarity: Rarity.LEGENDARY,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 11,
@@ -89,6 +139,11 @@ const items: Item[] = [
     powerValue: 200,
     type: ItemType.HAT,
     rarity: Rarity.UNCOMMON,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 12,
@@ -97,6 +152,11 @@ const items: Item[] = [
     powerValue: 600,
     type: ItemType.HAT,
     rarity: Rarity.EPIC,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
   {
     id: 13,
@@ -105,6 +165,11 @@ const items: Item[] = [
     powerValue: 1200,
     type: ItemType.HAT,
     rarity: Rarity.LEGENDARY,
+    statisticsRanges: {
+      vitality: { min: 100, max: 200 },
+      strength: { min: 100, max: 200 },
+      intelligence: { min: 100, max: 200 },
+    },
   },
 ]
 

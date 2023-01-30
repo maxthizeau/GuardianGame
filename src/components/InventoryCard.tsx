@@ -4,7 +4,7 @@ import Currency from "./Currency"
 import energyIcon from "../assets/icons/energy.svg"
 import { slugify } from "../libs/utils"
 import InventoryTable from "./InventoryTable"
-import InventoryList from "./InventoryList"
+import InventoryList from "./ItemList"
 import { InventoryItem } from "../data/types"
 
 interface IProps {
@@ -12,13 +12,11 @@ interface IProps {
   activeItems: InventoryItem[]
   maximumActiveItemsCount: number
   tableItems: InventoryItem[]
-  type?: "list" | "table"
   onClickItem?: (arg: InventoryItem) => void
 }
 //  Should be tested so we never have more
 
-const InventoryCard: FC<IProps> = ({ title, type, maximumActiveItemsCount, activeItems, tableItems, onClickItem }) => {
-  const finalType = type ?? "table"
+const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems, tableItems, onClickItem }) => {
   return (
     <div className="inventory-card">
       <h2 className="inventory-card-title">{title}</h2>
@@ -45,7 +43,7 @@ const InventoryCard: FC<IProps> = ({ title, type, maximumActiveItemsCount, activ
           })}
         </div>
       )}
-      {finalType == "table" ? <InventoryTable items={tableItems} title={title} /> : <InventoryList items={tableItems} title={title} />}
+      <InventoryTable items={tableItems} title={title} />
     </div>
   )
 }
