@@ -15,11 +15,20 @@ Stack :
 - **REST API** (WiP)
 - Testing Library ? Jest ? (I did not decided yet)
 
-**Bold** : Skills I'm focusing on for this project (+ Git, + React Suspsense)
+**Bold** : Skills I'm focusing on for this project (+ React Suspsense + Git - that's why I made some unnecessary branches)
 
 ## Documentation :
 
-I'll write some documentation after Core Commit.
+Project structure :
+
+- 📁 src
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 assets (images, font)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 components (React Components)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 data (raw data (ex: items, characters, ...) and types)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 layouts (Header, Footer and big react components)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 libs (library config and utility files)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 styles (scss files)
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 📁 views (App views)
 
 ## Images
 
