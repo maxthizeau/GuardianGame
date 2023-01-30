@@ -21,9 +21,9 @@ const InventoryTable: FC<IProps> = ({ items, title }) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => {
+          {items.map((item, index) => {
             return (
-              <tr key={`table-item-${slugify(title)}-${item.id}`}>
+              <tr key={`table-item-${slugify(title)}-${index}`}>
                 <td className="td-image">
                   <img src={item.image} />
                 </td>
