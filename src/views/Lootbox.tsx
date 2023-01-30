@@ -13,6 +13,7 @@ import { shuffleArray } from "../libs/utils"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import "../styles/lootbox.scss"
+import { toast } from "react-toastify"
 
 interface IProps {
   // children: ReactNode
@@ -25,7 +26,7 @@ const LootboxView: FC<IProps> = ({ lootbox }) => {
   const [drawing, setDrawing] = useState<{ active: boolean; itemWon?: InventoryItem }>({ active: false, itemWon: undefined })
 
   // Shuffle on render so animation get different everytime (json stuff is to make a hard copy)
-  const itemsArray = shuffleArray(JSON.parse(JSON.stringify(lootbox.data)))
+  const itemsArray: typeof lootbox.data = shuffleArray(JSON.parse(JSON.stringify(lootbox.data)))
 
   function startDrawing(itemWon: InventoryItem) {
     setDrawing({ active: true, itemWon })
