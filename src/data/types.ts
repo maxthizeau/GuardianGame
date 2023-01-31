@@ -1,5 +1,5 @@
 export enum ItemType {
-  CHARACTER,
+  HERO,
   GUARDIAN,
   RING,
   HAT,
@@ -50,6 +50,7 @@ export interface Item extends InventoryItem {
   inventoryId: number
   statistics: Statistic
   skill?: Skill
+  isEquiped: boolean
 }
 
 // Guardian looted
@@ -63,7 +64,7 @@ export interface Guardian extends InventoryItem {
 }
 
 // Character looted
-export interface Character extends InventoryItem {
+export interface Hero extends InventoryItem {
   inventoryId: number
   statistics: Statistic
   level: number
@@ -75,7 +76,7 @@ export interface Character extends InventoryItem {
 export enum LootboxType {
   GUARDIANS,
   ITEMS,
-  CHARACTERS,
+  HERO,
 }
 
 export interface Lootbox {
@@ -86,3 +87,5 @@ export interface Lootbox {
   cost: number
   data: InventoryItem[]
 }
+
+export type Character = Guardian | Hero

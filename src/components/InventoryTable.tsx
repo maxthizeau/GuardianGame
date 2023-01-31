@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 import energyIcon from "../assets/icons/energy.svg"
-import { Character, Guardian, InventoryItem, ItemType } from "../data/types"
+import { Character, Guardian } from "../data/types"
 import { slugify } from "../libs/utils"
 import Currency from "./Currency"
 import { useAppDispatch } from "../redux/store"
@@ -8,8 +8,7 @@ import { inventoryActions } from "../redux/slices/inventorySlice"
 
 interface IProps {
   title: string
-  // type: ItemType.GUARDIAN | ItemType.CHARACTER
-  items: (Guardian | Character)[]
+  items: Character[]
   onClickTable: (inventoryId: number) => void
 }
 

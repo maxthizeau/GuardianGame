@@ -1,19 +1,14 @@
-import { FC, ReactNode } from "react"
-import InventoryCard from "../components/InventoryCard"
-import characters from "../data/characters"
-import guardians from "../data/guardians"
-import items from "../data/items"
-import Actions from "../layouts/Actions"
+import { FC } from "react"
 import PlaceholderImage from "../assets/placeholder.png"
-import "../styles/character.scss"
-import { Character, Guardian } from "../data/types"
 import { MAX_ITEM_COUNT_PER_CHAR } from "../libs/constants"
 import { useAppSelector } from "../redux/store"
 import ItemCard from "../components/ItemCard"
+import "../styles/character.scss"
+import { Character } from "../data/types"
 
 interface IProps {
   // children: ReactNode
-  character: Guardian | Character
+  character: Character
 }
 
 const CharacterView: FC<IProps> = ({ character }) => {

@@ -1,21 +1,16 @@
-import { FC, ReactNode } from "react"
+import { FC } from "react"
 import AlertMessage from "./AlertMessage"
-import Currency from "./Currency"
-import energyIcon from "../assets/icons/energy.svg"
 import { slugify } from "../libs/utils"
 import InventoryTable from "./InventoryTable"
-import InventoryList from "./ItemList"
-import { InventoryItem, Guardian, Character } from "../data/types"
+import { Character } from "../data/types"
 import { toast } from "react-toastify"
-
-type GuardianOrCharacter = Guardian | Character
 
 interface IProps {
   title: string
-  activeItems: GuardianOrCharacter[]
+  activeItems: Character[]
   maximumActiveItemsCount: number
-  tableItems: GuardianOrCharacter[]
-  onClickItem?: (arg: GuardianOrCharacter) => void
+  tableItems: Character[]
+  onClickItem?: (arg: Character) => void
   onClickTable: (inventoryId: number) => void
 }
 //  Should be tested so we never have more

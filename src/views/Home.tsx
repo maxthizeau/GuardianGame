@@ -1,12 +1,12 @@
 import { FC, ReactNode } from "react"
 import InventoryCard from "../components/InventoryCard"
-import characters from "../data/characters"
+import characters from "../data/heroes"
 import guardians from "../data/guardians"
 import { InventoryItem } from "../data/types"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { appActions, EViews } from "../redux/slices/appSlice"
 import ItemCard from "../components/ItemCard"
-import { MAX_CHARACTER_COUNT, MAX_GUARDIAN_COUNT } from "../libs/constants"
+import { MAX_HERO_COUNT, MAX_GUARDIAN_COUNT } from "../libs/constants"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 
 interface IProps {
@@ -36,11 +36,11 @@ const HomeView: FC<IProps> = ({}) => {
           onClickItem={(char: InventoryItem) => {
             dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char }))
           }}
-          activeItems={inventory.characters.filter((x) => x.isSelected)}
-          tableItems={inventory.characters}
-          maximumActiveItemsCount={MAX_CHARACTER_COUNT}
+          activeItems={inventory.heroes.filter((x) => x.isSelected)}
+          tableItems={inventory.heroes}
+          maximumActiveItemsCount={MAX_HERO_COUNT}
           onClickTable={(inventoryId: number) => {
-            dispatch(inventoryActions.selectCharacter({ inventoryId }))
+            dispatch(inventoryActions.selectHero({ inventoryId }))
           }}
         />
       </div>

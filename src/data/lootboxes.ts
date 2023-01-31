@@ -2,7 +2,7 @@ import { Lootbox, LootboxType } from "./types"
 import { Lootbox2, Lootbox3, Lootbox4 } from "../assets/lootbox"
 import items from "./items"
 import guardians from "./guardians"
-import characters from "./characters"
+import characters from "./heroes"
 const lootboxes: Lootbox[] = [
   {
     id: 1,

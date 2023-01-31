@@ -1,21 +1,21 @@
-import { Character, Guardian, InventoryItem, Item, LootboxType, Statistic, StatisticRange } from "../../data/types"
+import { Hero, Guardian, InventoryItem, Item, LootboxType, Statistic, StatisticRange, Character } from "../../data/types"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import lootboxes from "../../data/lootboxes"
-import { MAX_GUARDIAN_COUNT, MAX_CHARACTER_COUNT } from "../../libs/constants"
-import characters from "../../data/characters"
+import { MAX_GUARDIAN_COUNT, MAX_HERO_COUNT } from "../../libs/constants"
 import items from "../../data/items"
 import guardians from "../../data/guardians"
+import heroes from "../../data/heroes"
 
 interface IInventoryState {
   money: number
-  characters: Character[]
+  heroes: Hero[]
   guardians: Guardian[]
   items: Item[]
 }
 
 const initialState: IInventoryState = {
   money: 1000,
-  characters: [],
+  heroes: [],
   guardians: [],
   items: [],
 }
@@ -32,7 +32,7 @@ const generateStatistics = (statsRange: StatisticRange): Statistic => {
   }
 }
 
-const canPushToTeam = (data: (Character | Guardian)[], maximumActive: number, setSelected: boolean) => {
+const canPushToTeam = (data: Character[], maximumActive: number, setSelected: boolean) => {
   // If the action is to remove from team : no problem
   if (!setSelected) {
     return true
@@ -51,7 +51,7 @@ const filterRandom = (x: any) => x.id % Math.floor(Math.random() * 4 + 1)
 const generateTestModeState = (): IInventoryState => {
   return {
     money: 10500,
-    characters: characters.filter(filterRandom).map((x, index) => {
+    heroes: heroes.filter(filterRandom).map((x, index) => {
       return {
         ...x,
         inventoryId: index + 1,
@@ -78,6 +78,7 @@ const generateTestModeState = (): IInventoryState => {
         ...x,
         inventoryId: index + 1,
         statistics: generateStatistics(x.statisticsRanges),
+        isEquiped: false,
       }
     }),
   }
@@ -104,11 +105,11 @@ const inventorySlice = createSlice({
 
       // Create and add item to the state
       switch (lootbox.type) {
-        case LootboxType.CHARACTERS:
-          state.characters.push({
+        case LootboxType.HERO:
+          state.heroes.push({
             ...itemWon,
             // Add character's specific values
-            inventoryId: state.characters.length + 1,
+            inventoryId: state.heroes.length + 1,
             level: 1,
             statistics: generateStatistics(itemWon.statisticsRanges),
             xp: 0,
@@ -132,8 +133,9 @@ const inventorySlice = createSlice({
           state.items.push({
             ...itemWon,
             // Add item's specific values
-            inventoryId: state.characters.length + 1,
+            inventoryId: state.items.length + 1,
             statistics: generateStatistics(itemWon.statisticsRanges),
+            isEquiped: false,
             // skill: TODO
           })
           break
@@ -154,19 +156,20 @@ const inventorySlice = createSlice({
         }
       }
     },
-    // add/remove character to team
-    selectCharacter: (state, action: PayloadAction<{ inventoryId: number }>) => {
-      const characterIndex = state.characters.findIndex((x) => x.inventoryId == action.payload.inventoryId)
+    // add/remove heroes to team
+    selectHero: (state, action: PayloadAction<{ inventoryId: number }>) => {
+      const heroIndex = state.heroes.findIndex((x) => x.inventoryId == action.payload.inventoryId)
       //  -1 = not found
-      if (characterIndex > -1) {
+      if (heroIndex > -1) {
         // revert the "isSelected"
-        const characterSelected = state.characters[characterIndex]
-        const newValue = !characterSelected.isSelected
-        if (canPushToTeam(state.characters, MAX_CHARACTER_COUNT, newValue)) {
-          state.characters[characterIndex].isSelected = !characterSelected.isSelected
+        const heroSelected = state.heroes[heroIndex]
+        const newValue = !heroSelected.isSelected
+        if (canPushToTeam(state.heroes, MAX_HERO_COUNT, newValue)) {
+          state.heroes[heroIndex].isSelected = !heroSelected.isSelected
         }
       }
     },
+
     enableTestMode: (state) => {
       return generateTestModeState()
     },
