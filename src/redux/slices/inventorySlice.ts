@@ -105,7 +105,7 @@ const inventorySlice = createSlice({
 
       // Create and add item to the state
       switch (lootbox.type) {
-        case LootboxType.HERO:
+        case LootboxType.HEROES:
           state.heroes.push({
             ...itemWon,
             // Add character's specific values

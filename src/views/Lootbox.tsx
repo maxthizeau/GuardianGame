@@ -1,19 +1,13 @@
-import { FC, ReactNode, useEffect, useState } from "react"
-import { moneyIcon, powerIcon } from "../assets/icons"
-import { Lootbox3, Lootbox4 } from "../assets/lootbox"
+import { FC, useState } from "react"
+import { moneyIcon } from "../assets/icons"
 import AlertMessage from "../components/AlertMessage"
 import Currency from "../components/Currency"
 import LootboxDraw from "../components/LootboxDraw"
-import characters from "../data/heroes"
-import guardians from "../data/guardians"
-import items from "../data/items"
-import { InventoryItem, Lootbox, LootboxType } from "../data/types"
-import Actions from "../layouts/Actions"
+import { InventoryItem, Lootbox } from "../data/types"
 import { shuffleArray } from "../libs/utils"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import "../styles/lootbox.scss"
-import { toast } from "react-toastify"
 
 interface IProps {
   // children: ReactNode

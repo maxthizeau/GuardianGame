@@ -1,7 +1,5 @@
 import { FC, ReactNode } from "react"
 import InventoryCard from "../components/InventoryCard"
-import characters from "../data/heroes"
-import guardians from "../data/guardians"
 import { InventoryItem } from "../data/types"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { appActions, EViews } from "../redux/slices/appSlice"

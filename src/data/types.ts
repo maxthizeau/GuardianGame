@@ -76,7 +76,7 @@ export interface Hero extends InventoryItem {
 export enum LootboxType {
   GUARDIANS,
   ITEMS,
-  HERO,
+  HEROES,
 }
 
 export interface Lootbox {

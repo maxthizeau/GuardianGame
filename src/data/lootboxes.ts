@@ -2,7 +2,7 @@ import { Lootbox, LootboxType } from "./types"
 import { Lootbox2, Lootbox3, Lootbox4 } from "../assets/lootbox"
 import items from "./items"
 import guardians from "./guardians"
-import characters from "./heroes"
+import heroes from "./heroes"
 const lootboxes: Lootbox[] = [
   {
     id: 1,
@@ -22,11 +22,11 @@ const lootboxes: Lootbox[] = [
   },
   {
     id: 3,
-    type: LootboxType.CHARACTERS,
+    type: LootboxType.HEROES,
     image: Lootbox4,
     name: "Characters Lootbox",
     cost: 1000,
-    data: characters,
+    data: heroes,
   },
 ]
 
