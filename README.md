@@ -1,5 +1,8 @@
 # 🎮 Guardians Game
 
+🔗 [Test the current master branch](https://guardian-game-9t5m1h754-maxthizeau.vercel.app/)
+(Keep in mind that it's still work in progress)
+
 🎮 Guardians Game is a game I make to practice and learn some frontend skills.
 The goal of this project is to link it with Twitch API, and be able to buy items and characters with channel points.
 
