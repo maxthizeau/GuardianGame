@@ -5,11 +5,13 @@ import ItemSelector from "./ItemSelector"
 
 interface IProps {
   title: string
-  items: InventoryItem[]
+  items: Item[]
+  onEquip?: (itemInventoryId: number) => void
+  equippedItems?: number[]
 }
 
-const InventoryList: FC<IProps> = ({ title, items }) => {
-  const [selectedItem, setSelectedItem] = useState<InventoryItem | undefined>(undefined)
+const ItemList: FC<IProps> = ({ title, items, onEquip, equippedItems }) => {
+  const [selectedItem, setSelectedItem] = useState<Item | undefined>(undefined)
 
   return (
     <div className="inventory-item-selector">
@@ -24,9 +26,9 @@ const InventoryList: FC<IProps> = ({ title, items }) => {
             )
           })}
       </div>
-      <ItemSelector itemSelected={selectedItem} />
+      <ItemSelector equipped={selectedItem && equippedItems?.includes(selectedItem.inventoryId)} itemSelected={selectedItem} onEquip={onEquip} />
     </div>
   )
 }
 
-export default InventoryList
+export default ItemList

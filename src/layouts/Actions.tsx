@@ -20,7 +20,7 @@ const Actions: FC<IProps> = ({}) => {
           onClick={() => dispatch(appActions.changeView({ type: EViews.HOME }))}
         />
         <ActionButton
-          title="Buy Character"
+          title="Buy Hero"
           secondaryLine={<Currency flat icon={{ src: moneyIcon, alt: "Money Icon" }} value={1000} />}
           onClick={() => dispatch(appActions.changeView({ type: EViews.LOOTBOX, arg: lootboxes[2] }))}
         />

@@ -24,7 +24,7 @@ const lootboxes: Lootbox[] = [
     id: 3,
     type: LootboxType.HEROES,
     image: Lootbox4,
-    name: "Characters Lootbox",
+    name: "Heroes Lootbox",
     cost: 1000,
     data: heroes,
   },

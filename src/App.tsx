@@ -18,7 +18,7 @@ function App() {
         <Actions />
         {currentView.type == EViews.HOME && <HomeView />}
         {currentView.type == EViews.LOOTBOX && <LootboxView lootbox={currentView.arg} />}
-        {currentView.type == EViews.CHARACTER && <CharacterView character={currentView.arg} />}
+        {currentView.type == EViews.CHARACTER && <CharacterView characterId={currentView.arg} />}
       </div>
       {/* Toast Container */}
       <ToastContainer

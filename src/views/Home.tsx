@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 import InventoryCard from "../components/InventoryCard"
-import { InventoryItem } from "../data/types"
+import { Character, InventoryItem, ItemType } from "../data/types"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { appActions, EViews } from "../redux/slices/appSlice"
 import ItemCard from "../components/ItemCard"
@@ -22,23 +22,26 @@ const HomeView: FC<IProps> = ({}) => {
       <div className="inventory">
         <InventoryCard
           title="Guardians"
-          activeItems={inventory.guardians.filter((x) => x.isSelected)}
-          tableItems={inventory.guardians}
+          activeItems={inventory.characters.filter((x) => x.isSelected && x.type === ItemType.GUARDIAN)}
+          tableItems={inventory.characters.filter((x) => x.type === ItemType.GUARDIAN)}
           maximumActiveItemsCount={MAX_GUARDIAN_COUNT}
           onClickTable={(inventoryId: number) => {
-            dispatch(inventoryActions.selectGuardian({ inventoryId }))
+            dispatch(inventoryActions.selectCharacter({ inventoryId }))
+          }}
+          onClickItem={(char: Character) => {
+            dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char.inventoryId }))
           }}
         />
         <InventoryCard
-          title="Characters"
-          onClickItem={(char: InventoryItem) => {
-            dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char }))
+          title="Heroes"
+          onClickItem={(char: Character) => {
+            dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char.inventoryId }))
           }}
-          activeItems={inventory.heroes.filter((x) => x.isSelected)}
-          tableItems={inventory.heroes}
+          activeItems={inventory.characters.filter((x) => x.isSelected && x.type === ItemType.HERO)}
+          tableItems={inventory.characters.filter((x) => x.type === ItemType.HERO)}
           maximumActiveItemsCount={MAX_HERO_COUNT}
           onClickTable={(inventoryId: number) => {
-            dispatch(inventoryActions.selectHero({ inventoryId }))
+            dispatch(inventoryActions.selectCharacter({ inventoryId }))
           }}
         />
       </div>
