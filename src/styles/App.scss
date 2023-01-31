@@ -128,7 +128,7 @@ button {
 }
 
 .inventory-table {
-  max-height: 340px;
+  max-height: 500px;
   overflow: scroll;
 }
 
@@ -189,6 +189,8 @@ table {
   background-color: $dark;
   border-radius: $radius;
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
   thead {
     th {
       padding: 1rem 0;
@@ -212,4 +214,12 @@ table {
     border-color: map-get($map: $rarity-colors, $key: $i) !important;
     box-shadow: 0 0 90px calc(10px + (#{$i}px * 3)) map-get($map: $rarity-colors, $key: $i);
   }
+}
+
+.border {
+  outline: 1px solid $secondary;
+}
+
+.clickable {
+  cursor: pointer;
 }

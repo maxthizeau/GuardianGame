@@ -10,7 +10,7 @@ import "../styles/lootbox.scss"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 
 // Constant : Increase to make animation longer
-const ANIMATION_STEPS_COUNT = 10
+const ANIMATION_STEPS_COUNT = 3
 
 interface ILootboxDrawProps {
   active: boolean

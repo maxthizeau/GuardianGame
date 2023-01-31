@@ -6,6 +6,8 @@ import { InventoryItem } from "../data/types"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { appActions, EViews } from "../redux/slices/appSlice"
 import ItemCard from "../components/ItemCard"
+import { MAX_CHARACTER_COUNT, MAX_GUARDIAN_COUNT } from "../libs/constants"
+import { inventoryActions } from "../redux/slices/inventorySlice"
 
 interface IProps {
   // children: ReactNode
@@ -20,15 +22,26 @@ const HomeView: FC<IProps> = ({}) => {
 
       {/* Start Inventory */}
       <div className="inventory">
-        <InventoryCard title="Guardians" activeItems={[guardians[0], guardians[1]]} tableItems={inventory.guardians} maximumActiveItemsCount={2} />
+        <InventoryCard
+          title="Guardians"
+          activeItems={inventory.guardians.filter((x) => x.isSelected)}
+          tableItems={inventory.guardians}
+          maximumActiveItemsCount={MAX_GUARDIAN_COUNT}
+          onClickTable={(inventoryId: number) => {
+            dispatch(inventoryActions.selectGuardian({ inventoryId }))
+          }}
+        />
         <InventoryCard
           title="Characters"
           onClickItem={(char: InventoryItem) => {
             dispatch(appActions.changeView({ type: EViews.CHARACTER, arg: char }))
           }}
-          activeItems={[characters[0]]}
+          activeItems={inventory.characters.filter((x) => x.isSelected)}
           tableItems={inventory.characters}
-          maximumActiveItemsCount={2}
+          maximumActiveItemsCount={MAX_CHARACTER_COUNT}
+          onClickTable={(inventoryId: number) => {
+            dispatch(inventoryActions.selectCharacter({ inventoryId }))
+          }}
         />
       </div>
       {/* End Inventory */}

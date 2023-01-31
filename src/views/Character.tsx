@@ -6,14 +6,19 @@ import items from "../data/items"
 import Actions from "../layouts/Actions"
 import PlaceholderImage from "../assets/placeholder.png"
 import "../styles/character.scss"
+import { Character, Guardian } from "../data/types"
+import { MAX_ITEM_COUNT_PER_CHAR } from "../libs/constants"
+import { useAppSelector } from "../redux/store"
+import ItemCard from "../components/ItemCard"
 
 interface IProps {
   // children: ReactNode
+  character: Guardian | Character
 }
 
-const CharacterView: FC<IProps> = ({}) => {
-  const character = characters[0]
-  const stuff = [items[0], items[1], items[11]]
+const CharacterView: FC<IProps> = ({ character }) => {
+  const userItems = useAppSelector((state) => state.inventory.items)
+  // const stuff = [items[0], items[1], items[11]]
   return (
     <>
       {/* <Actions /> */}
@@ -25,16 +30,14 @@ const CharacterView: FC<IProps> = ({}) => {
             <div className="character-main">
               <img className={`character-main-image rarity-${character.rarity}`} src={character.image} />
               <div className="character-stuff">
-                <div className="item-slot">
-                  <img src={stuff[2].image} />
-                </div>
-                <div className="item-slot">
-                  <img src={stuff[0].image} />
-                </div>
-                <div className="item-slot">{/* <img src={stuff[1].image} /> */}</div>
+                {new Array(MAX_ITEM_COUNT_PER_CHAR).fill(undefined).map((_, index) => {
+                  // item.items[index] = inventoryId of item equiped
+                  const stuffItem = userItems.find((x) => x.inventoryId == character.items[index])
+                  return <div className="item-slot">{stuffItem && <img src={stuffItem.image} />}</div>
+                })}
               </div>
             </div>
-            <h3>Level 19</h3>
+            <h3>Level {character.level}</h3>
             <span>XP Bar</span>
           </div>
 
@@ -46,19 +49,19 @@ const CharacterView: FC<IProps> = ({}) => {
                   <td>
                     <b>Vitality</b>
                   </td>
-                  <td>920</td>
+                  <td>{character.statistics.vitality}</td>
                 </tr>
                 <tr>
                   <td>
                     <b>Strength</b>
                   </td>
-                  <td>122</td>
+                  <td>{character.statistics.strength}</td>
                 </tr>
                 <tr>
                   <td>
                     <b>Intelligence</b>
                   </td>
-                  <td>92</td>
+                  <td>{character.statistics.intelligence}</td>
                 </tr>
               </tbody>
             </table>
@@ -111,7 +114,7 @@ const CharacterView: FC<IProps> = ({}) => {
         </div>
       </div>
       <div className="card">
-        <InventoryCard type="list" title="Items" activeItems={[]} tableItems={[...items]} maximumActiveItemsCount={0} />
+        <ItemCard title="Items" items={userItems} />
       </div>
     </>
   )

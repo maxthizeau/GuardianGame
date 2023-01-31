@@ -5,18 +5,22 @@ import energyIcon from "../assets/icons/energy.svg"
 import { slugify } from "../libs/utils"
 import InventoryTable from "./InventoryTable"
 import InventoryList from "./ItemList"
-import { InventoryItem } from "../data/types"
+import { InventoryItem, Guardian, Character } from "../data/types"
+import { toast } from "react-toastify"
+
+type GuardianOrCharacter = Guardian | Character
 
 interface IProps {
   title: string
-  activeItems: InventoryItem[]
+  activeItems: GuardianOrCharacter[]
   maximumActiveItemsCount: number
-  tableItems: InventoryItem[]
-  onClickItem?: (arg: InventoryItem) => void
+  tableItems: GuardianOrCharacter[]
+  onClickItem?: (arg: GuardianOrCharacter) => void
+  onClickTable: (inventoryId: number) => void
 }
 //  Should be tested so we never have more
 
-const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems, tableItems, onClickItem }) => {
+const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems, tableItems, onClickItem, onClickTable }) => {
   return (
     <div className="inventory-card">
       <h2 className="inventory-card-title">{title}</h2>
@@ -28,22 +32,27 @@ const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems
       {/* TODO : Fill with empty if not full */}
       {maximumActiveItemsCount > 0 && (
         <div className="inventory-active-items">
-          {activeItems.map((item) => {
+          {new Array(maximumActiveItemsCount).fill(undefined).map((_, index) => {
+            const item = activeItems[index] ?? undefined
             return (
               <div
-                key={`active-item-${slugify(title)}-${item.id}`}
+                key={`active-item-${slugify(title)}-${index}`}
                 className="inventory-item"
                 onClick={(e) => {
-                  onClickItem && onClickItem(item)
+                  // if item : resolve onClick function.
+                  // else : push notification to say "click on one guardian of you inventory to equip" or smthg like that
+                  item
+                    ? onClickItem && onClickItem(item)
+                    : toast("Add a Guardian/Character to your team first", { type: "info", position: "top-center", autoClose: 2000, hideProgressBar: true })
                 }}
               >
-                <img src={item.image} />
+                {item && <img src={item.image} />}
               </div>
             )
           })}
         </div>
       )}
-      <InventoryTable items={tableItems} title={title} />
+      <InventoryTable items={tableItems} title={title} onClickTable={onClickTable} />
     </div>
   )
 }

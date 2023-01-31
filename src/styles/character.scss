@@ -25,7 +25,8 @@
 
   .item-slot {
     @include inventory-item-colors;
-    width: 25%;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
     & img {
       min-height: 100%;

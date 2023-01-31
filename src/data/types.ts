@@ -58,6 +58,8 @@ export interface Guardian extends InventoryItem {
   statistics: Statistic
   level: number
   xp: number
+  items: number[]
+  isSelected: boolean
 }
 
 // Character looted
@@ -66,6 +68,8 @@ export interface Character extends InventoryItem {
   statistics: Statistic
   level: number
   xp: number
+  items: number[]
+  isSelected: boolean
 }
 
 export enum LootboxType {

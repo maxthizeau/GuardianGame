@@ -17,6 +17,16 @@ const Header: FC<IProps> = ({}) => {
         <Currency icon={{ src: powerIcon, alt: "Power Icon" }} value={524} />
         {/* A button to test store - will disappear in the future. */}
         <button onClick={() => dispatch(inventoryActions.earnMoney(300))}>Earn money</button>
+        <button
+          className="mx-2"
+          onClick={() => {
+            // if (confirm("Enabling test mode will erase the current state and generating a fake advanced account")) {
+            dispatch(inventoryActions.enableTestMode())
+            // }
+          }}
+        >
+          TEST MODE
+        </button>
       </div>
     </header>
   )

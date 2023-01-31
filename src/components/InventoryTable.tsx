@@ -1,15 +1,20 @@
 import { FC, ReactNode } from "react"
 import energyIcon from "../assets/icons/energy.svg"
-import { InventoryItem } from "../data/types"
+import { Character, Guardian, InventoryItem, ItemType } from "../data/types"
 import { slugify } from "../libs/utils"
 import Currency from "./Currency"
+import { useAppDispatch } from "../redux/store"
+import { inventoryActions } from "../redux/slices/inventorySlice"
 
 interface IProps {
   title: string
-  items: InventoryItem[]
+  // type: ItemType.GUARDIAN | ItemType.CHARACTER
+  items: (Guardian | Character)[]
+  onClickTable: (inventoryId: number) => void
 }
 
-const InventoryTable: FC<IProps> = ({ items, title }) => {
+const InventoryTable: FC<IProps> = ({ items, title, onClickTable }) => {
+  const dispatch = useAppDispatch()
   return (
     <div className="inventory-table">
       <table>
@@ -23,7 +28,11 @@ const InventoryTable: FC<IProps> = ({ items, title }) => {
         <tbody>
           {items.map((item, index) => {
             return (
-              <tr key={`table-item-${slugify(title)}-${index}`}>
+              <tr
+                className={item.isSelected ? `border clickable` : "clickable"}
+                key={`table-item-${slugify(title)}-${index}`}
+                onClick={() => onClickTable(item.inventoryId)}
+              >
                 <td className="td-image">
                   <img src={item.image} />
                 </td>

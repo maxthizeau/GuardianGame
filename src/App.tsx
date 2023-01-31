@@ -21,21 +21,20 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 function App() {
   const currentView = useAppSelector((state) => state.app.view)
-  const notify = () => toast("Push notification test", { type: "success" })
 
   return (
     <div className="app">
       <Header />
       <div className="main">
         <Actions />
-        <button onClick={notify}>[Test] Send push</button>
         {currentView.type == EViews.HOME && <HomeView />}
         {currentView.type == EViews.LOOTBOX && <LootboxView lootbox={currentView.arg} />}
-        {currentView.type == EViews.CHARACTER && <CharacterView />}
+        {currentView.type == EViews.CHARACTER && <CharacterView character={currentView.arg} />}
       </div>
       {/* Toast Container */}
       <ToastContainer
         position="top-right"
+        limit={0}
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
