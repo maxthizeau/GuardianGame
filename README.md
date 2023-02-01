@@ -16,9 +16,9 @@ Stack :
 - **SCSS**
 - **Redux** (WiP)
 - **REST API** (WiP)
-- Testing Library ? Jest ? (I did not decided yet)
+- **Testing Library** / Vitest
 
-**Bold** : Skills I'm focusing on for this project (+ React Suspsense + Git - that's why I made some unnecessary branches)
+**Bold** : Skills I'm focusing on for this project (+ React Suspsense + Git - that's why some commits may seem useless)
 
 ## Documentation :
 

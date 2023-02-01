@@ -1,11 +1,6 @@
-import { FC, ReactNode } from "react"
-import AlertMessage from "./AlertMessage"
-import Currency from "./Currency"
-import energyIcon from "../assets/icons/energy.svg"
-import { slugify } from "../libs/utils"
-import InventoryTable from "./InventoryTable"
+import { FC } from "react"
 import ItemList from "./ItemList"
-import { InventoryItem, Item } from "../data/types"
+import { Item } from "../data/types"
 
 interface IProps {
   title: string
