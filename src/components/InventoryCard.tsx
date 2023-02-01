@@ -1,6 +1,6 @@
 import { FC } from "react"
 import AlertMessage from "./AlertMessage"
-import { slugify } from "../libs/utils"
+import { slugify } from "../utils/utils"
 import InventoryTable from "./InventoryTable"
 import { Character } from "../data/types"
 import { toast } from "react-toastify"

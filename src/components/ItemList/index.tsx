@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from "react"
 import { InventoryItem, Item } from "../../data/types"
-import { slugify } from "../../libs/utils"
+import { slugify } from "../../utils/utils"
 import ItemSelector from "./ItemSelector"
 
 interface IProps {

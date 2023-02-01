@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react"
 import energyIcon from "../assets/icons/energy.svg"
 import { Character, Guardian } from "../data/types"
-import { slugify } from "../libs/utils"
+import { slugify } from "../utils/utils"
 import Currency from "./Currency"
 import { useAppDispatch } from "../redux/store"
 import { inventoryActions } from "../redux/slices/inventorySlice"
