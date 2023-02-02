@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { InventoryItem, Lootbox } from "../data/types"
 import { ANIMATION_STEPS_COUNT } from "../libs/constants"
-import { shuffleArray } from "../libs/utils"
+import { shuffleArray } from "../utils/utils"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 import { useAppDispatch } from "../redux/store"
 
