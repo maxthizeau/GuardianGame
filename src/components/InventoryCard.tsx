@@ -5,7 +5,7 @@ import InventoryTable from "./InventoryTable"
 import { Character } from "../data/types"
 import { toast } from "react-toastify"
 
-interface IProps {
+export interface IInventoryCardProps {
   title: string
   activeItems: Character[]
   maximumActiveItemsCount: number
@@ -15,10 +15,12 @@ interface IProps {
 }
 //  Should be tested so we never have more
 
-const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems, tableItems, onClickItem, onClickTable }) => {
+const InventoryCard: FC<IInventoryCardProps> = ({ title, maximumActiveItemsCount, activeItems, tableItems, onClickItem, onClickTable }) => {
   return (
     <div className="inventory-card">
-      <h2 className="inventory-card-title">{title}</h2>
+      <h2 className="inventory-card-title" role="title">
+        {title}
+      </h2>
 
       {activeItems.length > maximumActiveItemsCount && (
         <AlertMessage type="error" title="Error Message" message="Fatal error, it seems like you have more active item than authorized." />
@@ -31,6 +33,7 @@ const InventoryCard: FC<IProps> = ({ title, maximumActiveItemsCount, activeItems
             const item = activeItems[index] ?? undefined
             return (
               <div
+                aria-label="active-item"
                 key={`active-item-${slugify(title)}-${index}`}
                 className="inventory-item"
                 onClick={(e) => {

@@ -2,9 +2,13 @@ import React, { ReactElement } from "react"
 import { cleanup, render, RenderOptions } from "@testing-library/react"
 import { Provider } from "react-redux"
 import { store } from "../redux/store"
+import { getTestData } from "./test-data"
 
+export let mockData = getTestData()
 afterEach(() => {
   cleanup()
+  // mockData is reseted after each test
+  mockData = getTestData()
 })
 
 // No theme provider atm, but I might use one later.

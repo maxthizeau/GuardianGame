@@ -1,12 +1,12 @@
 import React, { FC, ReactNode } from "react"
 import Currency from "./Currency"
 
-interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IActionButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string
   secondaryLine?: ReactNode
 }
 
-const ActionButton: FC<IProps> = ({ title, secondaryLine, ...props }) => {
+const ActionButton: FC<IActionButtonProps> = ({ title, secondaryLine, ...props }) => {
   return (
     <button className="big center" {...props}>
       {title}

@@ -9,7 +9,7 @@ interface IProps {
 
 const AlertMessage: FC<IProps> = ({ type, title, message }) => {
   return (
-    <div className={`alert ${type}`}>
+    <div role="alert" className={`alert ${type}`}>
       {title && <div className="alert-title">{title}</div>}
       {message}
     </div>
