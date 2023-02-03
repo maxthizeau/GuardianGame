@@ -6,13 +6,13 @@ import items from "../../data/items"
 import guardians from "../../data/guardians"
 import heroes from "../../data/heroes"
 
-interface IInventoryState {
+export interface IInventoryState {
   money: number
   characters: Character[]
   items: Item[]
 }
 
-const initialState: IInventoryState = {
+export const initialState: IInventoryState = {
   money: 1000,
   characters: [],
   items: [],
@@ -96,7 +96,9 @@ const inventorySlice = createSlice({
   initialState,
   reducers: {
     earnMoney: (state, action: PayloadAction<number>) => {
-      state.money += action.payload
+      if (action.payload > 0) {
+        state.money += action.payload
+      }
     },
     buyLootbox: (state, action: PayloadAction<{ lootboxId: number; itemWonId: number }>) => {
       const lootbox = lootboxes.find((x) => x.id == action.payload.lootboxId)
@@ -195,20 +197,19 @@ const inventorySlice = createSlice({
 
     // equip item
     equipItem: (state, action: PayloadAction<{ charInventoryId: number; itemInventoryId: number }>) => {
-      console.log("equip")
       const { charInventoryId, itemInventoryId } = action.payload
       const itemSelectedIndex = state.items.findIndex((x) => x.inventoryId == itemInventoryId)
 
       // Verify item exists
       if (itemSelectedIndex < 0 || itemSelectedIndex >= state.items.length) {
-        console.log("Item does not exist")
+        // console.log("Item does not exist")
         return state
       }
 
       const itemSelected = state.items.find((x) => x.inventoryId == itemInventoryId)
 
       if (!itemSelected || itemSelected.isEquiped) {
-        console.log("Item is already equiped")
+        // console.log("Item is already equiped")
         return state
       }
 
@@ -217,7 +218,7 @@ const inventorySlice = createSlice({
       if (charSelectedIndex > -1 && charSelectedIndex < state.characters.length) {
         const charSelected = state.characters[charSelectedIndex]
         // Verify character has a slot for this item
-        if (charSelected.items.length + 1 <= MAX_ITEM_COUNT_PER_CHAR) {
+        if (charSelected.items.length + 1 <= MAX_ITEM_COUNT_PER_CHAR && state.characters[charSelectedIndex].isSelected) {
           // push item's inventoryId to items array of the selected character
           state.characters[charSelectedIndex].items.push(itemInventoryId)
           // Set "isEquiped" of item to true

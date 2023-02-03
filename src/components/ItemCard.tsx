@@ -17,7 +17,9 @@ const ItemCard: FC<IProps> = ({ title, items, onEquip, equippedItems }) => {
       {items.length > 0 ? (
         <ItemList items={items} title={title} onEquip={onEquip} equippedItems={equippedItems} />
       ) : (
-        <div className="center">It looks like you don't have any item yet. Purchase some first !</div>
+        <div data-testid="no-item-message" className="center">
+          It looks like you don't have any item yet. Purchase some first !
+        </div>
       )}
     </div>
   )

@@ -1,18 +1,26 @@
-import { configureStore, Store } from "@reduxjs/toolkit"
+import { combineReducers, configureStore, PreloadedState, Store } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import { appReducer } from "./slices/appSlice"
 import { inventoryReducer } from "./slices/inventorySlice"
 import { profileReducer } from "./slices/profileSlice"
 
-export const store = configureStore({
-  reducer: {
-    app: appReducer,
-    profile: profileReducer,
-    inventory: inventoryReducer,
-  },
+const RootReducers = combineReducers({
+  app: appReducer,
+  profile: profileReducer,
+  inventory: inventoryReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: RootReducers,
+    preloadedState,
+  })
+}
+
+export const store = setupStore()
+
+export type RootState = ReturnType<typeof RootReducers>
 export type AppDispatch = typeof store.dispatch
+export type AppStore = ReturnType<typeof setupStore>
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const useAppDispatch = () => useDispatch<AppDispatch>()
