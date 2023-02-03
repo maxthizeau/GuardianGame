@@ -1,18 +1,43 @@
+@import "libs/reset.scss";
+
 @import "libs/var";
+@import "libs/media";
 @import "libs/margins";
 
 #root {
-  max-width: 1280px;
+  // width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  @include break(xs) {
+    max-width: 370px;
+  }
+  @include break(sm) {
+    max-width: 550px;
+  }
+  @include break(md) {
+    max-width: 840px;
+  }
+  @include break(lg) {
+    max-width: 950px;
+  }
+  @include break(xl) {
+    max-width: 1050px;
+  }
+  @include break(xxl) {
+    max-width: 1200px;
+  }
+  @include break(xxxl) {
+    max-width: 1600px;
+  }
 }
 
 .app {
   //   background-color: $primary;
 
   .main {
-    min-width: 320px;
+    // min-width: 120px;
     min-height: calc(100vh - 12rem);
     // background: red;
     display: flex;
@@ -20,6 +45,15 @@
     // justify-content: center;
     margin: 0;
   }
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 .icon {
@@ -33,14 +67,38 @@ header {
   width: 100%;
   align-items: center;
   margin-bottom: 4rem;
+  flex-wrap: wrap;
+
+  @include break(md) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .currencies {
   display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem 0rem;
+
+  @include break(md) {
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    & > .currency {
+      flex-basis: calc(50% - 3rem - 2px);
+      display: flex;
+    }
+
+    & > button {
+      flex-basis: calc(50% - 1rem);
+      display: flex;
+    }
+  }
 }
 
 .currency {
-  margin: 0 2rem;
+  // margin: 0 2rem;
   border-radius: $radius;
   border: 1px solid $secondary;
   background: #1a1a1a;
@@ -48,7 +106,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
 }
 
 .flat {
@@ -64,7 +122,7 @@ header {
 
 button {
   &.big {
-    font-size: 1.5rem;
+    font-size: 1.5em;
   }
 
   & .secondary-line {
@@ -75,9 +133,17 @@ button {
 
 .actions {
   display: flex;
-  justify-content: center;
-  gap: 8rem;
+  justify-content: space-evenly;
+  gap: 1rem 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  @include break(md) {
+    font-size: 0.9em;
+    & > button {
+      flex: 0 45%;
+    }
+  }
 }
 
 .card {
@@ -92,6 +158,16 @@ button {
 .inventory {
   display: flex;
 
+  @include break(md) {
+    flex-wrap: wrap;
+
+    .inventory-card {
+      flex-basis: 100%;
+      margin-top: 0 !important;
+      margin-bottom: 2rem !important;
+    }
+  }
+
   .inventory-card {
     @extend .card;
     width: 50%;
@@ -105,8 +181,7 @@ button {
 
 .inventory-active-items {
   display: flex;
-  justify-content: center;
-  gap: 3rem;
+  justify-content: space-evenly;
   margin-bottom: 2rem;
 }
 
@@ -117,8 +192,12 @@ button {
   display: flex;
   height: 80px;
   width: 80px;
-
   overflow: hidden;
+
+  @include break(sm) {
+    height: 60px;
+    width: 60px;
+  }
 
   & img {
     width: 100%;
@@ -130,6 +209,20 @@ button {
 .inventory-table {
   max-height: 500px;
   overflow: scroll;
+}
+
+@include break(sm) {
+  .inventory-item-selector {
+    flex-direction: column;
+    .inventory-list,
+    .item-selector {
+      width: 100%;
+    }
+    .item-selector {
+      border: none;
+      padding: 0;
+    }
+  }
 }
 
 .inventory-item-selector {
@@ -206,6 +299,7 @@ table {
   th,
   td {
     padding: 0.25rem 0.5rem;
+    vertical-align: middle;
   }
   tbody tr {
     &:nth-child(odd) {

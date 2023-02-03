@@ -1,4 +1,5 @@
 @import "libs/var";
+@import "libs/media";
 
 .character-card {
   display: flex;
@@ -8,19 +9,32 @@
   img {
     width: 100%;
   }
+
+  @include break(md) {
+    flex-direction: column;
+    .character-left {
+      width: 100%;
+    }
+  }
 }
 
 .character-left {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 60%;
   gap: 2rem;
+  @include break(xxl) {
+    width: 50%;
+  }
+  @include break(xl) {
+    width: 70%;
+  }
 }
 
 .character-stuff {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-evenly;
 
@@ -32,6 +46,11 @@
     & img {
       min-height: 100%;
       object-fit: cover;
+    }
+
+    @include breakBetween(md, xl) {
+      width: 60px;
+      height: 60px;
     }
   }
 }
