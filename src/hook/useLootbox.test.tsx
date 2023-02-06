@@ -1,17 +1,12 @@
-import * as redux from "react-redux"
-import { act, CreateWrapper, mockData, render, renderHook, renderWithProviders, screen } from "../utils/test-utils"
+import { act, createWrapper, mockData, renderHook } from "../utils/test-utils"
 import { AnimationState, useLootbox } from "./useLootbox"
-import { vi } from "vitest"
-import { setupStore } from "../redux/store"
-import { inventoryActions } from "../redux/slices/inventorySlice"
-import { testRootState } from "../utils/test-data"
 
 // return { buy, close, itemToShow, animationState, active }
 const testLootbox = mockData.lootboxes[0]
 
 describe("useLookbox - hook", () => {
   it("should start animation when buying a lootbox ", () => {
-    const { result } = renderHook(() => useLootbox(testLootbox), { wrapper: CreateWrapper })
+    const { result } = renderHook(() => useLootbox(testLootbox), { wrapper: createWrapper() })
     expect(result.current.active).toBe(false)
     // Buy to start animation and stuff
     act(() => {
@@ -23,7 +18,7 @@ describe("useLookbox - hook", () => {
   })
 
   it("should reset completly when calling close function", () => {
-    const { result } = renderHook(() => useLootbox(testLootbox), { wrapper: CreateWrapper })
+    const { result } = renderHook(() => useLootbox(testLootbox), { wrapper: createWrapper() })
 
     // Init : Expect it to be as default
     expect(result.current.active).toBe(false)

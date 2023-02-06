@@ -1,7 +1,5 @@
-import { Character, Hero, Item, Guardian, InventoryItem, ItemType, Rarity, Lootbox, LootboxType } from "../data/types"
-import { MAX_HERO_COUNT } from "../libs/constants"
-import { EViews } from "../redux/slices/appSlice"
-import { RootState } from "../redux/store"
+import { Character, Hero, Item, Guardian, InventoryItem, ItemType, Rarity, Lootbox, LootboxType } from "../../data/types"
+import { MAX_HERO_COUNT } from "../../libs/constants"
 
 const inventoryItems: InventoryItem[] = [
   {
@@ -239,20 +237,4 @@ export const getTestData = () => {
     heroes,
     lootboxes,
   }
-}
-
-export const testRootState: RootState = {
-  app: {
-    view: {
-      type: EViews.HOME,
-    },
-  },
-  inventory: {
-    money: 0,
-    characters: [],
-    items: [],
-  },
-  profile: {
-    name: "testusername",
-  },
 }

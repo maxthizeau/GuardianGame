@@ -12,7 +12,7 @@ enum LoadingState {
 
 interface IProfileState {
   name: string
-  twitchId?: undefined
+  twitchId?: string
   accessToken?: string
 }
 
@@ -59,10 +59,10 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
-      console.log("Pending... (to handle)")
+      // console.log("Pending... (to handle)")
     })
     builder.addCase(fetchUser.rejected, (state, action) => {
-      console.log(action.error.message)
+      // console.log(action.error.message)
       state = initialState
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
@@ -75,3 +75,4 @@ const profileSlice = createSlice({
 
 export const profileReducer = profileSlice.reducer
 export const profileActions = profileSlice.actions
+export const getProfileInitialState = profileSlice.getInitialState

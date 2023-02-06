@@ -1,17 +1,17 @@
 import { useState, useEffect, useMemo, useCallback } from "react"
+import { LOCAL_KEY_twitchAccessToken, LOCAL_KEY_uuid } from "../libs/constants"
 import { fetchUser, profileActions } from "../redux/slices/profileSlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import { uuid } from "../utils/utils"
 const clientId = import.meta.env.VITE_TWITCH_SECRET_TOKEN
 
-const LOCAL_KEY_uuid = "uuidState"
-const LOCAL_KEY_twitchAccessToken = "twitchAccessToken"
-
 const useAuth = () => {
   const profile = useAppSelector((state) => state.profile)
   const dispatch = useAppDispatch()
 
-  const isAuthenticated = useMemo(() => profile.accessToken !== undefined && profile.twitchId !== undefined, [, profile.accessToken, profile.twitchId])
+  const isAuthenticated = useMemo(() => {
+    return profile.accessToken !== undefined && profile.twitchId !== undefined
+  }, [profile.accessToken, profile.twitchId])
 
   useEffect(() => {
     dispatch(fetchUser(profile.accessToken))
@@ -28,7 +28,7 @@ const useAuth = () => {
   const setAccessToken = (receivedAccessToken?: string) =>
     receivedAccessToken ? localStorage.setItem(LOCAL_KEY_twitchAccessToken, receivedAccessToken) : false
   // get Access token from localStorage
-  const accessToken = localStorage.getItem(LOCAL_KEY_twitchAccessToken) ?? undefined
+  const localAccessToken = localStorage.getItem(LOCAL_KEY_twitchAccessToken) ?? undefined
 
   const logout = () => {
     // remove items from storage
@@ -49,7 +49,7 @@ const useAuth = () => {
 
   return {
     isAuthenticated,
-    accessToken,
+    localAccessToken,
     setAccessToken,
     setUuidState,
     compareUuidState,
