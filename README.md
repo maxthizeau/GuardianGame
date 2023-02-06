@@ -1,6 +1,6 @@
 # 🎮 Guardians Game
 
-🔗 [Test the current master branch](https://guardian-game-9t5m1h754-maxthizeau.vercel.app/)
+🔗 [Test the current master branch](https://guardian-game.vercel.app/)
 (Keep in mind that it's still work in progress)
 
 🎮 Guardians Game is a game I make to practice and learn some frontend skills.
