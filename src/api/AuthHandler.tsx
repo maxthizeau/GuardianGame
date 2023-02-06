@@ -12,7 +12,7 @@ const AuthHandler: FC<IProps> = ({}) => {
   const { hash, search } = useLocation()
   const [success, setSuccess] = useState<boolean>(false)
   const [error, setError] = useState<string | undefined>()
-  const { accessToken, setAccessToken, compareUuidState } = useAuth()
+  const { setAccessToken, compareUuidState } = useAuth()
   const navigate = useNavigate()
   const profile = useAppSelector((state) => state.profile)
   const dispatch = useAppDispatch()
