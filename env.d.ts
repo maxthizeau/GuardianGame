@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_TWITCH_SECRET_TOKEN: string
+  readonly VITE_FRONTURL: string
   // more env variables...
 }
 

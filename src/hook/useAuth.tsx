@@ -4,6 +4,7 @@ import { fetchUser, profileActions } from "../redux/slices/profileSlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import { uuid } from "../utils/utils"
 const clientId = import.meta.env.VITE_TWITCH_SECRET_TOKEN
+const frontUrl = import.meta.env.PROD ? import.meta.env.VITE_FRONTURL : "http://localhost:5173/"
 
 const useAuth = () => {
   const profile = useAppSelector((state) => state.profile)
@@ -43,7 +44,7 @@ const useAuth = () => {
     setUuidState(stateString)
     const responseType = "token"
     const scope = "channel%3Amanage%3Apolls+channel%3Aread%3Apolls"
-    const redirectUri = "http://localhost:5173/auth"
+    const redirectUri = `${frontUrl}auth`
     window.location.href = `https://id.twitch.tv/oauth2/authorize?response_type=${responseType}&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${stateString}`
   }
 
