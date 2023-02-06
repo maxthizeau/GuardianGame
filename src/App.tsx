@@ -6,8 +6,9 @@ import LootboxView from "./views/Lootbox"
 import CharacterView from "./views/Character"
 import { useAppSelector } from "./redux/store"
 import { EViews } from "./redux/slices/appSlice"
-import { ToastContainer, toast } from "react-toastify"
+import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+
 function App() {
   const currentView = useAppSelector((state) => state.app.view)
 

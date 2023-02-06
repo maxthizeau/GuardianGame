@@ -79,19 +79,20 @@ header {
   display: flex;
   max-width: 100%;
   flex-wrap: wrap;
-  gap: 1rem 0rem;
+  gap: 1rem 1rem;
 
   @include break(md) {
     justify-content: space-between;
     margin-bottom: 2rem;
 
     & > .currency {
-      flex-basis: calc(50% - 3rem - 2px);
+      flex-basis: calc(50% - 5rem - 2px);
       display: flex;
     }
 
-    & > button {
-      flex-basis: calc(50% - 1rem);
+    & > button,
+    & > .link-button {
+      flex-basis: calc(50% - 3rem);
       display: flex;
     }
   }

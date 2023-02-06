@@ -4,7 +4,7 @@ import "../styles/alerts.scss"
 interface IProps {
   type: "success" | "error" | "info" | "warning"
   title?: string
-  message: string
+  message: string | ReactNode
 }
 
 const AlertMessage: FC<IProps> = ({ type, title, message }) => {

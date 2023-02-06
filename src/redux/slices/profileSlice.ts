@@ -1,11 +1,49 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import axios from "axios"
+const clientId = import.meta.env.VITE_TWITCH_SECRET_TOKEN
+
+// not used
+enum LoadingState {
+  INACTIVE,
+  STARTED,
+  DONE,
+  ERROR,
+}
 
 interface IProfileState {
   name: string
+  twitchId?: undefined
+  accessToken?: string
 }
+
+const twitchAccessToken = localStorage.getItem("twitchAccessToken") ?? undefined
+
+export const fetchUser = createAsyncThunk("profile/fetchUser", (token?: string) => {
+  let finalToken = token ?? localStorage.getItem("twitchAccessToken") ?? undefined
+
+  if (!finalToken) {
+    throw Error("No token to fetch")
+  }
+  return axios({
+    method: "get",
+    url: "https://api.twitch.tv/helix/users",
+    headers: {
+      Authorization: `Bearer ${finalToken}`,
+      "Client-Id": clientId,
+    },
+  }).then((response) => {
+    const user = response.data?.data?.[0]
+    return {
+      userId: user["id"] ?? undefined,
+      displayName: user["display_name"] ?? undefined,
+      accessToken: finalToken,
+    }
+  })
+})
 
 const initialState: IProfileState = {
   name: "Username",
+  accessToken: twitchAccessToken,
 }
 
 const profileSlice = createSlice({
@@ -15,6 +53,23 @@ const profileSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
+    logout: (state) => {
+      return initialState
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUser.pending, (state) => {
+      console.log("Pending... (to handle)")
+    })
+    builder.addCase(fetchUser.rejected, (state, action) => {
+      console.log(action.error.message)
+      state = initialState
+    })
+    builder.addCase(fetchUser.fulfilled, (state, action) => {
+      state.accessToken = action.payload.accessToken
+      state.name = action.payload.displayName
+      state.twitchId = action.payload.userId
+    })
   },
 })
 
