@@ -1,5 +1,6 @@
 import { combineReducers, configureStore, PreloadedState, Store } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import saveMiddleware from "./middlewares/saveMiddleware"
 import { appReducer } from "./slices/appSlice"
 import { inventoryReducer } from "./slices/inventorySlice"
 import { profileReducer } from "./slices/profileSlice"
@@ -14,6 +15,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: RootReducers,
     preloadedState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(saveMiddleware.middleware),
   })
 }
 

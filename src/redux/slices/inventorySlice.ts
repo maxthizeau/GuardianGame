@@ -230,8 +230,12 @@ const inventorySlice = createSlice({
     enableTestMode: (state) => {
       return generateTestModeState()
     },
+    importSave: (state, action: PayloadAction<{ serializedState: IInventoryState }>) => {
+      return action.payload.serializedState
+    },
   },
 })
 
 export const inventoryReducer = inventorySlice.reducer
 export const inventoryActions = inventorySlice.actions
+export const getInventoryInitialState = inventorySlice.getInitialState
