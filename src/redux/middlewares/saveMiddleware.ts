@@ -1,8 +1,8 @@
-import { createListenerMiddleware, isAllOf, isAnyOf, isAsyncThunkAction, isFulfilled } from "@reduxjs/toolkit"
+import { createListenerMiddleware, isAllOf, isAnyOf, isAsyncThunkAction, isFulfilled, TypedStartListening } from "@reduxjs/toolkit"
 import { inventoryActions } from "../slices/inventorySlice"
 import axios from "axios"
 import { APIResponse, SaveFromApi } from "../../types/ApiResponse"
-import { RootState } from "../store"
+import { AppDispatch, RootState } from "../store"
 import { GAME_VERSION } from "../../libs/constants"
 import { decrypt, serializeAndEncrypt } from "../../utils/serializer"
 import { fetchUser } from "../slices/profileSlice"
@@ -40,6 +40,10 @@ saveMiddleware.startListening({
   },
 })
 
+// export type AppStartListening = TypedStartListening<RootState, AppDispatch>
+
+// export const startAppListening =
+//   saveMiddleware.startListening as AppStartListening
 /**
  * Middleware listening when we load user --> get the save from the backend
  */
@@ -48,6 +52,7 @@ saveMiddleware.startListening({
   effect: async (action, listenerApi) => {
     // Cancel other running instances
     listenerApi.cancelActiveListeners()
+
     // Get Current state
     const currentState = listenerApi.getState() as RootState
     // The only way to update twitchId is to ask from Twitch API
@@ -58,14 +63,17 @@ saveMiddleware.startListening({
 
       // fetch backend to get the encrypted save
       const data = await saveApi.fetchSave(currentState.profile.twitchId)
+
       // fetchSave returns either a {data} or {error}.
       // do nothing if there was an error while fetching backend
       if (data.data) {
         // decrypt the serializedState and convert it to a IInventoryState object
         const decryptedSave = decrypt(data.data.serializedState)
+
         // if decrypt failed, it returns null - do nothing if it fails
         if (decryptedSave) {
           listenerApi.dispatch(inventoryActions.importSave({ serializedState: decryptedSave }))
+          const newState = listenerApi.getState() as RootState
         }
       } else {
         // No data

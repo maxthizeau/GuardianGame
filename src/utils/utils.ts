@@ -27,3 +27,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 }
 
 export const uuid = () => Math.random().toString(36).substring(2, 16)
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

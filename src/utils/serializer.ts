@@ -13,7 +13,7 @@ export const serializeAndEncrypt = (saveObject: IInventoryState) => {
     const encrypted = CryptoJS.AES.encrypt(saveJson, ENCRYPT_KEY)
     return encrypted.toString()
   } catch (e) {
-    console.error("SAVE ERROR", e)
+    // console.error("SAVE ERROR", e)
     return null
   }
 }
@@ -28,7 +28,7 @@ export const decrypt = (encrypted: string) => {
       throw new Error("Types don't match")
     }
   } catch (e: any) {
-    console.error("decrypt error :", e.message)
+    // console.error("decrypt error :", e.message)
     return null
   }
 }
