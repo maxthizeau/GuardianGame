@@ -9,6 +9,8 @@ import { shuffleArray } from "../utils/utils"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import "../styles/lootbox.scss"
+import LazyImage from "../components/LazyImage"
+import Spinner from "../components/Spinner"
 
 interface IProps {
   // children: ReactNode
@@ -17,7 +19,7 @@ interface IProps {
 
 const LootboxView: FC<IProps> = ({ lootbox }) => {
   const money = useAppSelector((state) => state.inventory.money)
-  const { buy, close, itemToShow, animationState, active } = useLootbox(lootbox)
+  const { buy, close, itemToShow, animationState, active, loaded } = useLootbox(lootbox)
 
   return (
     <>
@@ -27,12 +29,12 @@ const LootboxView: FC<IProps> = ({ lootbox }) => {
         <h2>{lootbox.name}</h2>
 
         {active ? (
-          <LootboxDraw active={active} itemToShow={itemToShow} close={close} animationState={animationState} />
+          <LootboxDraw loaded={loaded} active={active} itemToShow={itemToShow} close={close} animationState={animationState} />
         ) : (
           <>
             {money < lootbox.cost && <AlertMessage type="warning" message="You don't have enough money to buy this lootbox." />}
             <div className="clickable-lootbox">
-              <img src={lootbox.image} onClick={() => money >= lootbox.cost && buy()} />
+              <LazyImage src={lootbox.image} onClick={() => money >= lootbox.cost && buy()} />
             </div>
           </>
         )}

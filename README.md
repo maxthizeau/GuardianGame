@@ -3,6 +3,9 @@
 🔗 [Test the current master branch](https://guardian-game.vercel.app/)
 (Keep in mind that it's still work in progress)
 
+Figma Prototype : https://www.figma.com/file/RTviE8GqbClB2f57pWY2Gj/GuardiansGame?node-id=0%3A1&t=r2XqhjZePco3TO1v-1
+(It's not finished, but it's enough for me for this project to have a rough idea of the UI / UX design.)
+
 🎮 Guardians Game is a game I make to practice and learn some frontend skills.
 The goal of this project is to link it with Twitch API, and be able to buy items and characters with channel points.
 

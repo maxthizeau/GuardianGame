@@ -31,3 +31,18 @@ export const uuid = () => Math.random().toString(36).substring(2, 16)
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+/**
+ * @param path : Absolute image path
+ * @returns a Promise:
+ * resolve --> image loaded
+ * reject --> failed to load image
+ */
+export const checkImage = (path: string) =>
+  new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => resolve(path)
+    img.onerror = () => reject()
+
+    img.src = path
+  })

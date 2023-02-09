@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { InventoryItem, Lootbox } from "../data/types"
 import { ANIMATION_STEPS_COUNT } from "../libs/constants"
-import { shuffleArray } from "../utils/utils"
+import { checkImage, shuffleArray } from "../utils/utils"
 import { inventoryActions } from "../redux/slices/inventorySlice"
 import { useAppDispatch } from "../redux/store"
 
@@ -9,6 +9,15 @@ import { useAppDispatch } from "../redux/store"
 // <= -1 : not started
 // > ANIMATION_STEPS_COUNT : finished
 // otherwise : active
+
+export function sliceIntoChunks<T>(arr: T[], chunkSize: number) {
+  const res = []
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    const chunk = arr.slice(i, i + chunkSize)
+    res.push(chunk)
+  }
+  return res
+}
 
 export enum AnimationState {
   NOT_STARTED,
@@ -22,6 +31,21 @@ export const useLootbox = (lootbox: Lootbox) => {
   const [animationStep, setAnimationStep] = useState(-1)
   const [itemWon, setItemWon] = useState<InventoryItem | undefined>(undefined)
   const [active, setActive] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState(false)
+
+  // Function that will load all images in browser and update loaded state variable
+  const loadImages = useCallback(async () => {
+    await Promise.all(
+      itemsArray.map(async (item) => {
+        await checkImage(item.image)
+      })
+    ).then(
+      () => {
+        setLoaded(true)
+      },
+      () => console.error("Error : Could not load images")
+    )
+  }, [itemsArray])
 
   const animationState = useMemo(() => {
     // console.debug("useMemo animationState")
@@ -44,6 +68,9 @@ export const useLootbox = (lootbox: Lootbox) => {
     // console.debug("useEffect lootbox")
     // Happen when user changes view : Reset the view by calling close
     close()
+    // reset loaded as false, to ensure images are loaded correctly when switching lootbox
+    setLoaded(false)
+
     // Shuffle itemsArray that is used in animation and draw
     setItemsArray(shuffleArray([...lootbox.data]))
   }, [lootbox])
@@ -51,9 +78,14 @@ export const useLootbox = (lootbox: Lootbox) => {
   // Create interval to change image (animation) every x miliseconds
   useEffect(() => {
     // console.debug("useEffect animationStep")
+    // If AnimationState is Active but loaded is false, we have to load images first
+    if (animationState == AnimationState.ACTIVE && !loaded) {
+      loadImages()
+    }
+    // Then start animation
     // If animationStep has been updated, active, and interval has not been started yet :
     // animationStep is used to show animation : a new possible loot image every interval
-    if (animationState == AnimationState.ACTIVE) {
+    if (animationState == AnimationState.ACTIVE && loaded) {
       const intervalId = setInterval(() => {
         // What to do every interval : increment animation step
         setAnimationStep((prevState) => prevState + 1)
@@ -64,7 +96,7 @@ export const useLootbox = (lootbox: Lootbox) => {
         clearInterval(intervalId)
       }
     }
-  }, [animationStep])
+  }, [animationStep, loaded])
 
   // return an item won
   const draw = (): InventoryItem | undefined => {
@@ -94,7 +126,7 @@ export const useLootbox = (lootbox: Lootbox) => {
   }
 
   //
-  const buy = () => {
+  const buy = async () => {
     // console.debug("buy")
     // No need to verify user's money, since it's already protected in reducer actions + front
     const won = draw()
@@ -113,5 +145,5 @@ export const useLootbox = (lootbox: Lootbox) => {
     setAnimationStep(-1)
   }
 
-  return { buy, close, itemToShow, animationState, active }
+  return { buy, close, itemToShow, animationState, active, loaded }
 }

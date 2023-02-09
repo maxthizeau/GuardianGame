@@ -6,6 +6,7 @@
 
 #root {
   // width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -24,12 +25,6 @@
   }
   @include break(xl) {
     max-width: 1050px;
-  }
-  @include break(xxl) {
-    max-width: 1200px;
-  }
-  @include break(xxxl) {
-    max-width: 1600px;
   }
 }
 
@@ -324,4 +319,68 @@ table {
 
 .clickable {
   cursor: pointer;
+}
+
+$spinner-border-size: 4px;
+
+.spinner {
+  content: "";
+  display: block;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  margin: auto auto;
+  position: relative;
+}
+
+.spinner-loader1 {
+  border: $spinner-border-size solid #5099ff;
+  width: calc(100% - $spinner-border-size * 2);
+  height: calc(100% - $spinner-border-size * 2);
+
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: rotate 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
+
+  position: absolute;
+}
+.spinner-loader2 {
+  border: $spinner-border-size solid #dfdfdf;
+  width: calc(80% - $spinner-border-size * 2);
+  height: calc(80% - $spinner-border-size * 2);
+
+  top: 10%;
+  left: 10%;
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: rotate2 2s cubic-bezier(0.26, 1.36, 0.74, -0.29) infinite;
+  position: absolute;
+}
+.spinner-text {
+  position: absolute;
+  width: 100%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(-360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes rotate2 {
+  0% {
+    transform: rotateZ(360deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
 }
