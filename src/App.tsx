@@ -1,27 +1,34 @@
-import "./styles/App.scss"
-import Header from "./layouts/Header"
-import Actions from "./layouts/Actions"
-import HomeView from "./views/Home"
-import LootboxView from "./views/Lootbox"
-import CharacterView from "./views/Character"
-import { useAppSelector } from "./redux/store"
-import { EViews } from "./redux/slices/appSlice"
+import { useAppSelector, useAppDispatch } from "./redux/store"
+import { appActions } from "./redux/slices/appSlice"
 import { ToastContainer } from "react-toastify"
+import Preview from "./components/Preview/Preview"
+import { useEffect } from "react"
 import "react-toastify/dist/ReactToastify.css"
+import "./styles/App.scss"
 
-function App() {
+function App({ children }: { children: React.ReactNode }) {
   const currentView = useAppSelector((state) => state.app.view)
+  const dispatch = useAppDispatch()
+
+  // Clear the preview when press "Escape"
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key == "Escape") {
+        e.preventDefault()
+        dispatch(appActions.clearPreview())
+      }
+    })
+  }, [])
 
   return (
     <div className="app">
-      <Header />
-      <div className="main">
-        <Actions />
-        {currentView.type == EViews.HOME && <HomeView />}
-        {currentView.type == EViews.LOOTBOX && <LootboxView lootbox={currentView.arg} />}
-        {currentView.type == EViews.CHARACTER && <CharacterView characterId={currentView.arg} />}
-      </div>
+      <div className="background-elipsis-1" />
+      <div className="background-elipsis-2" />
+
+      {children}
+
       {/* Toast Container */}
+      <Preview mobile />
       <ToastContainer
         position="top-right"
         limit={0}

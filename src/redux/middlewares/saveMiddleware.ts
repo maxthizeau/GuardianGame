@@ -16,7 +16,7 @@ const saveApi = new SaveAPI()
  * Middleware that send serialized state to backend
  */
 saveMiddleware.startListening({
-  matcher: isAnyOf(inventoryActions.earnMoney, inventoryActions.buyLootbox),
+  matcher: isAnyOf(inventoryActions.earnMoney, inventoryActions.buyLootbox, inventoryActions.equipItem, inventoryActions.selectCharacter),
   effect: async (action, listenerApi) => {
     listenerApi.cancelActiveListeners()
     // Get current state

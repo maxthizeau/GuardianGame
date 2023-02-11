@@ -1,15 +1,11 @@
-import { FC, useEffect, useState } from "react"
-import { powerIcon } from "../assets/icons"
-import { Lootbox3 } from "../assets/lootbox"
-import Currency from "../components/Currency"
-import items from "../data/items"
-import { InventoryItem } from "../data/types"
-import { shuffleArray } from "../utils/utils"
-import { useAppDispatch } from "../redux/store"
-import "../styles/lootbox.scss"
-import { inventoryActions } from "../redux/slices/inventorySlice"
-import { AnimationState } from "../hook/useLootbox"
-import Spinner from "./Spinner"
+import { FC } from "react"
+import { powerIcon } from "../../assets/icons"
+import { Lootbox3 } from "../../assets/lootbox"
+import Currency from "../Currency"
+import { InventoryItem } from "../../data/types"
+import { AnimationState } from "../../hook/useLootbox"
+import Spinner from "../Spinner"
+import "../../styles/lootbox.scss"
 
 interface ILootboxDrawProps {
   active: boolean

@@ -7,49 +7,37 @@ import { toast } from "react-toastify"
 import { useLocation, useNavigate } from "react-router-dom"
 
 import useAuth from "../hook/useAuth"
+import AuthButtons from "./AuthButtons"
 
 interface IProps {}
 
 const Header: FC<IProps> = ({}) => {
   const money = useAppSelector((state) => state.inventory.money)
-  const profile = useAppSelector((state) => state.profile)
-  const dispatch = useAppDispatch()
-  const { isAuthenticated, logout, handleOAuthTwitch } = useAuth()
 
   return (
     <header>
-      <div>
-        <a
-          className="link-button"
-          // href={isAuthenticated ? "#" :}
-          onClick={(e) => {
-            // setLoad ?
-            e.preventDefault()
-            !isAuthenticated && handleOAuthTwitch()
-          }}
-        >
-          {isAuthenticated ? profile.name : `Connect with Twitch`}
-        </a>
-        {isAuthenticated && (
-          <button className="mx-1" onClick={logout}>
-            Logout
-          </button>
-        )}
-      </div>
-      <div className="currencies">
-        <Currency icon={{ src: moneyIcon, alt: "Money Icon" }} value={money} />
-        <Currency icon={{ src: powerIcon, alt: "Power Icon" }} value={524} />
-        {/* A button to test store - will disappear in the future. */}
-        <button onClick={() => dispatch(inventoryActions.earnMoney(300))}>Earn money</button>
+      <div className="container">
         <button
-          onClick={() => {
-            // if (confirm("Enabling test mode will erase the current state and generating a fake advanced account")) {
-            dispatch(inventoryActions.enableTestMode())
-            // }
+          className="nav-mobile-icon"
+          onClick={(e) => {
+            e.preventDefault()
+            let sidebarClassnames = document.getElementById("sidebar")?.classList
+            if (sidebarClassnames?.contains("active")) {
+              sidebarClassnames.remove("active")
+            } else {
+              sidebarClassnames?.add("active")
+            }
           }}
         >
-          TEST MODE
+          <div className="bar" />
+          <div className="bar" />
+          <div className="bar" />
         </button>
+        <AuthButtons />
+        <div className="currencies">
+          <Currency icon={{ src: moneyIcon, alt: "Money Icon" }} value={money} />
+          <Currency icon={{ src: powerIcon, alt: "Power Icon" }} value={524} />
+        </div>
       </div>
     </header>
   )

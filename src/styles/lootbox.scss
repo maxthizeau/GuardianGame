@@ -3,6 +3,20 @@
 $box-width: 300px;
 $box-width-focused: calc($box-width * 1.1);
 
+.lootbox-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // height: calc($box-width-focused + 3rem);
+  button {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    width: fit-content;
+    margin: auto;
+  }
+}
+
 .clickable-lootbox {
   border-radius: $radius;
   //   overflow: hidden;
@@ -10,7 +24,7 @@ $box-width-focused: calc($box-width * 1.1);
   justify-content: center;
   width: $box-width-focused;
   height: $box-width-focused;
-  margin: auto;
+  margin: 2rem auto;
   transition: all 0.3s;
   cursor: pointer;
 
@@ -37,7 +51,7 @@ $box-width-focused: calc($box-width * 1.1);
   justify-content: center;
   width: $box-width;
   height: $box-width;
-  margin: auto;
+  margin: 2rem auto;
   margin-bottom: 2rem;
   transition: all 0.3s;
   cursor: pointer;

@@ -208,7 +208,7 @@ const inventorySlice = createSlice({
 
       const itemSelected = state.items.find((x) => x.inventoryId == itemInventoryId)
 
-      if (!itemSelected || itemSelected.isEquiped) {
+      if (!itemSelected) {
         // console.log("Item is already equiped")
         return state
       }
@@ -217,12 +217,25 @@ const inventorySlice = createSlice({
       // Verify char exists and has free slot for a new item
       if (charSelectedIndex > -1 && charSelectedIndex < state.characters.length) {
         const charSelected = state.characters[charSelectedIndex]
-        // Verify character has a slot for this item
-        if (charSelected.items.length + 1 <= MAX_ITEM_COUNT_PER_CHAR && state.characters[charSelectedIndex].isSelected) {
-          // push item's inventoryId to items array of the selected character
-          state.characters[charSelectedIndex].items.push(itemInventoryId)
-          // Set "isEquiped" of item to true
-          state.items[itemSelectedIndex].isEquiped = true
+        // If item is equiped
+        if (itemSelected.isEquiped) {
+          // but not on this char, do nothing
+          if (!charSelected.items.includes(itemSelected.inventoryId)) {
+            return state
+          } else {
+            // Remove from character items array
+            state.characters[charSelectedIndex].items = state.characters[charSelectedIndex].items.filter((x) => x !== itemSelected.inventoryId)
+            state.items[itemSelectedIndex].isEquiped = false
+          }
+        } else {
+          // else if item is not equipped yet
+          // Verify character has a slot for this item
+          if (charSelected.items.length + 1 <= MAX_ITEM_COUNT_PER_CHAR && state.characters[charSelectedIndex].isSelected) {
+            // push item's inventoryId to items array of the selected character
+            state.characters[charSelectedIndex].items.push(itemInventoryId)
+            // Set "isEquiped" of item to true
+            state.items[itemSelectedIndex].isEquiped = true
+          }
         }
       }
     },

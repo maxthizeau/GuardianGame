@@ -4,71 +4,52 @@
 .character-card {
   display: flex;
   flex-direction: row;
+  height: calc(100% - 5rem);
   gap: 2rem;
-
-  img {
-    width: 100%;
-  }
-
-  @include break(md) {
-    flex-direction: column;
-    .character-left {
-      width: 100%;
-    }
-  }
+  box-sizing: border-box;
 }
 
 .character-left {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  gap: 2rem;
-  @include break(xxl) {
-    width: 50%;
-  }
-  @include break(xl) {
-    width: 70%;
-  }
+  justify-content: flex-start;
+  width: 70%;
+  gap: 3rem;
+  height: 100%;
 }
 
 .character-stuff {
   width: 100%;
+
   display: flex;
-  // flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: left;
 
   .item-slot {
-    @include inventory-item-colors;
-    width: 80px;
-    height: 80px;
-    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
     & img {
-      min-height: 100%;
+      height: 100%;
       object-fit: cover;
-    }
-
-    @include breakBetween(md, xl) {
-      width: 60px;
-      height: 60px;
     }
   }
 }
 
 .character-main {
-  width: 80%;
-  margin: 0 auto;
-
-  .character-main-image {
-    border-radius: $radius;
-    // Remove border width
-    width: calc(100% - 10px);
-    // Remove box shadow that is inside rarity-$i class
-    box-shadow: none !important;
-    margin-bottom: 2rem;
-  }
+  width: 100%;
+  // height: calc(100% - 5rem);
+  box-sizing: border-box;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
 }
 
-.character-stats table img {
-  width: 120px;
+.character-right {
+  width: 35%;
+  height: 100%;
 }

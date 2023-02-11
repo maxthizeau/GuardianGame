@@ -1,9 +1,11 @@
 $primary: #ccc;
-$secondary: #646cff;
+$secondary: #5475eb;
 $text: #fff;
 $text-light: darken($text, 20);
 $dark: rgb(29, 29, 29);
 $dark-light: lighten($dark, 10);
+$background-color: #222222;
+$card-background: #1c1c1c;
 $radius: 8px;
 $transition-duration: 0.25s;
 
@@ -22,16 +24,22 @@ $rarity-colors: (
   4: rgb(255, 176, 91),
 );
 
-@mixin inventory-item-colors {
-  background-color: $dark;
-  border-radius: $radius;
-  cursor: pointer;
-  border: 3px solid $secondary;
-  transition: all $transition-duration;
+// @mixin inventory-item-colors {
+//   background-color: $dark;
+//   border-radius: $radius;
+//   cursor: pointer;
+//   border: 3px solid $secondary;
+//   transition: all $transition-duration;
 
-  &:hover {
-    background-color: darken($dark, 3);
-    border-color: lighten($secondary, 5);
-    transition: all $transition-duration;
-  }
+//   &:hover {
+//     background-color: darken($dark, 3);
+//     border-color: lighten($secondary, 5);
+//     transition: all $transition-duration;
+//   }
+// }
+
+@mixin textShadow($color: #000, $size: 1) {
+  -webkit-text-stroke: #{$size}px $color;
+  // @return #{$size}px 0 $color, -#{$size}px 0 $color, 0 #{$size}px $color, 0 -#{$size}px $color, #{$size / 2}px #{$size / 2}px $color,
+  //   -#{$size / 2}px -#{$size / 2}px $color, #{$size / 2}px -#{$size / 2}px $color, -#{$size / 2}px #{$size / 2}px $color;
 }

@@ -1,7 +1,7 @@
 $breakpoints: (  xs: 370, sm: 576, md: 852, lg: 968, xl: 1080, xxl: 1224, xxxl: 1650);
 
 @mixin break($bp) {
-  @media screen and (max-width: #{map-get($breakpoints, #{$bp})}px) {
+  @media screen and (min-width: #{map-get($breakpoints, #{$bp})}px) {
     @content;
   }
 }
