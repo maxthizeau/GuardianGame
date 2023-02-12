@@ -14,13 +14,17 @@ const Preview: FC<IProps> = ({ mobile }) => {
   const { clearPreview } = usePreview()
   const isActive = (preview.itemToShow && preview.type == "selected" && mobile) || (preview.itemToShow && !mobile)
   return (
-    <div className={`${mobile ? `preview-mobile` : `preview`} ${isActive ? "active" : ""}`}>
+    <div data-testid="preview-container" className={`${mobile ? `preview-mobile` : `preview`} ${isActive ? "active" : ""}`}>
       {preview.type == "selected" && (
-        <button className="close-preview" onClick={clearPreview}>
+        <button data-testid="close-button" className="close-preview" onClick={clearPreview}>
           x
         </button>
       )}
-      {!preview.itemToShow && <p className="preview-placeholder">Hover or select something to see details</p>}
+      {!preview.itemToShow && (
+        <p className="preview-placeholder" data-testid="preview-placeholder">
+          Hover or select something to see details
+        </p>
+      )}
       {preview.itemToShow?.type == "string" && <p className="preview-placeholder">{preview.itemToShow.item.toString()}</p>}
       {/* <p className="preview-placeholder">{preview.itemToShow}</p> */}
 

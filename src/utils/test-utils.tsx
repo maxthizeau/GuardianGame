@@ -8,6 +8,7 @@ import { AnyAction, PreloadedState } from "@reduxjs/toolkit"
 import ReactNode from "react"
 import { RouterProvider } from "react-router"
 import { getTestData } from "./mocks/inventoryItems.data"
+import { mockNetWorkResponse } from "./mocks/apiCalls.data"
 
 export let mockData = getTestData()
 afterEach(() => {

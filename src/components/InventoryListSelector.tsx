@@ -1,3 +1,8 @@
+/**
+ * This is a copy of InventoryList component, without filters/sorters and with a different setOnClickOnHover action type, taking care of the charId prop
+ * This can and should be factorized later on a single component for easier testing
+ */
+
 import { FC, ReactNode, useState, useCallback } from "react"
 import { Character, InventoryItem, Item, ItemType } from "../data/types"
 import { usePreview } from "../hook/usePreview"

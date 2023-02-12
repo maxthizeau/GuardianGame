@@ -7,10 +7,10 @@ interface IProps {
 }
 
 const GameHeader: FC<IProps> = ({ title, previousAction }) => {
-  const navigate = useNavigate()
   return (
     <div className="game-header">
       <div
+        data-testid="previous-button"
         className={`arrow left ${previousAction !== undefined ? "" : "disabled"}`}
         onClick={() => {
           previousAction && previousAction()

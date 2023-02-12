@@ -13,18 +13,18 @@ const ItemElement: FC<IProps> = ({ item, customWidth, extraContent, ...props }) 
   const powerValue = item ? (item?.statistics ? getPowerValue(item) : item?.powerValue) : "-"
   return (
     <>
-      <div className="game-inventory-item" {...props}>
+      <div data-testid="item-element" className="game-inventory-item" {...props}>
         <div
           className={`game-inventory-item-image border-rarity border-rarity-${item?.rarity ?? "none"}`}
           style={customWidth ? { width: `${customWidth}px`, height: `${customWidth}px` } : {}}
         >
           {item && (
             <>
-              <img src={item.image} className="" />
+              <img src={item.image} className="" data-testid="item-image" />
               <div className="game-inventory-item-gradiant">
                 <div className="item-power-indicator">
                   <img src={powerIcon} />
-                  <span>{powerValue}</span>
+                  <span data-testid="item-powervalue">{powerValue}</span>
                 </div>
               </div>
             </>

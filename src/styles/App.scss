@@ -600,7 +600,7 @@ aside#sidebar {
   display: none;
   position: relative;
   overflow: scroll;
-  padding: 2rem;
+  padding: 1rem;
   flex-direction: row;
   // justify-content: center;
   // align-items: center;
@@ -656,10 +656,6 @@ button.close-preview {
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   @include break(md) {
     display: none;
-  }
-
-  .preview-actions {
-    // padding-bottom: 1rem;
   }
 }
 .preview-mobile.active {

@@ -85,21 +85,22 @@ const InventoryList: FC<IProps> = ({ itemsArray, title, defaultSort, limit }) =>
     <>
       {title && <h3>{title}</h3>}
       <div className="inventory-sorters">
-        <a onClick={() => changeSorter("power")} className={getClassNames("power")}>
+        <a data-testid="sorter-button-power" onClick={() => changeSorter("power")} className={getClassNames("power")}>
           Power
         </a>
         {!itemsArray.find((x) => itemTypes.includes(x.type)) && (
-          <a onClick={() => changeSorter("level")} className={getClassNames("level")}>
+          <a data-testid="sorter-button-level" onClick={() => changeSorter("level")} className={getClassNames("level")}>
             Lvl
           </a>
         )}
-        <a onClick={() => changeSorter("date")} className={getClassNames("date")}>
+        <a data-testid="sorter-button-date" onClick={() => changeSorter("date")} className={getClassNames("date")}>
           Date
         </a>
-        {itemsArray.find((x) => itemTypes.includes(x.type)) && (
+        {!itemsArray.find((x) => characterTypes.includes(x.type)) && (
           <>
             <Divider vertical />
             <a
+              data-testid="filter-button-hide-equipped"
               className={filter == "hideEquipped" ? "active" : ""}
               onClick={() => {
                 setFilter(filter == "hideEquipped" ? undefined : "hideEquipped")
@@ -111,11 +112,12 @@ const InventoryList: FC<IProps> = ({ itemsArray, title, defaultSort, limit }) =>
         )}
       </div>
       {/* GameInventoryList */}
-      <div className="game-inventory-items-list">
+      <div className="game-inventory-items-list" role="contentinfo">
         {itemsArray
 
-          .sort(compareFunction)
+          .slice(0, limit)
           .filter((value) => filterFunction(value))
+          .sort(compareFunction)
           .map((item, index) => {
             const previewType = [ItemType.GUARDIAN, ItemType.HERO].includes(item.type) ? "character" : "item"
             return (

@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Character, InventoryItem, Item, Lootbox } from "../../data/types"
 
-export const enum EViews {
-  HOME,
-  CHARACTER,
-  LOOTBOX,
-}
+// export const enum EViews {
+//   HOME,
+//   CHARACTER,
+//   LOOTBOX,
+// }
 
-export type View = {
-  type: EViews
-  arg?: any
-}
+// export type View = {
+//   type: EViews
+//   arg?: any
+// }
 
 export type ItemInPreview = {
   item: InventoryItem | Character | Item | Lootbox | string
@@ -24,12 +24,12 @@ export type Preview = {
 }
 
 interface IAppState {
-  view: View
+  // view: View
   preview: Preview
 }
 
 const initialState: IAppState = {
-  view: { type: EViews.HOME },
+  // view: { type: EViews.HOME },
   preview: {},
 }
 
@@ -37,9 +37,9 @@ const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    changeView: (state, action: PayloadAction<View>) => {
-      state.view = action.payload
-    },
+    // changeView: (state, action: PayloadAction<View>) => {
+    //   state.view = action.payload
+    // },
     selectPreview: (state, action: PayloadAction<Preview>) => {
       // If type will be selected (user wants to display it and clicked on it)
       // or if current preview is not selected (on mouse hover for example)
