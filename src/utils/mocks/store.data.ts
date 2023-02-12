@@ -1,11 +1,8 @@
-import { EViews } from "../../redux/slices/appSlice"
 import { RootState } from "../../redux/store"
 
 export const testRootState: RootState = {
   app: {
-    view: {
-      type: EViews.HOME,
-    },
+    preview: {},
   },
   inventory: {
     money: 0,
