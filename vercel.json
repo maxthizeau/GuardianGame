@@ -3,7 +3,7 @@
     { "src": "/", "dest": "/" },
     { "src": "/auth", "dest": "/" },
     { "src": "/heroes", "dest": "/" },
-    { "src": "/character/:charId", "dest": "/" },
+    { "src": "/character/(.*)", "dest": "/" },
     { "src": "/guardians", "dest": "/" },
     { "src": "/item", "dest": "/" }
   ]
