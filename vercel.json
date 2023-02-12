@@ -1,6 +1,10 @@
 {
   "routes": [
     { "src": "/", "dest": "/" },
-    { "src": "/auth", "dest": "/" }
+    { "src": "/auth", "dest": "/" },
+    { "src": "/heroes", "dest": "/" },
+    { "src": "/character/:charId", "dest": "/" },
+    { "src": "/guardians", "dest": "/" },
+    { "src": "/item", "dest": "/" }
   ]
 }
