@@ -11,3 +11,5 @@ export const GAME_VERSION = { major: 0, minor: 1 }
 // local storage keys
 export const LOCAL_KEY_uuid = "uuidState"
 export const LOCAL_KEY_twitchAccessToken = "twitchAccessToken"
+export const GUEST_ACCESS_TOKEN = "guest_token_01"
+export const GUEST_TWITCH_ID = "-1"

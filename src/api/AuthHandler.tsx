@@ -4,7 +4,7 @@ import AlertMessage from "../components/AlertMessage"
 import { useAppSelector, useAppDispatch } from "../redux/store"
 import { fetchUser, profileActions } from "../redux/slices/profileSlice"
 import useAuth from "../hook/useAuth"
-import Header from "../layouts/Header"
+import MainLayout from "../layouts/MainLayout"
 
 interface IProps {}
 
@@ -90,33 +90,30 @@ const AuthHandler: FC<IProps> = ({}) => {
   }, [success])
 
   return (
-    <div className="app">
-      <Header />
-      <div className="main">
-        {error && <AlertMessage type="error" message={error} />}
-        {success && (
-          <AlertMessage
-            type="success"
-            message={
-              <div>
-                <p>Authenticated with Twitch successfully. You will be redirected in 3 seconds...</p>
-                <p>
-                  <b>
-                    <a href="/">If not, please click on this link.</a>
-                  </b>
-                </p>
-              </div>
-            }
-          />
-        )}
-        <div>
-          <p>Connected as {profile.name}</p>
-          <button className="my-4" onClick={() => navigate("/")}>
-            Go back to home page
-          </button>
-        </div>
+    <MainLayout>
+      {error && <AlertMessage type="error" message={error} />}
+      {success && (
+        <AlertMessage
+          type="success"
+          message={
+            <div>
+              <p>Authenticated with Twitch successfully. You will be redirected in 3 seconds...</p>
+              <p>
+                <b>
+                  <a href="/">If not, please click on this link.</a>
+                </b>
+              </p>
+            </div>
+          }
+        />
+      )}
+      <div>
+        <p>Connected as {profile.name}</p>
+        <button className="my-4" onClick={() => navigate("/")}>
+          Go back to home page
+        </button>
       </div>
-    </div>
+    </MainLayout>
   )
 }
 

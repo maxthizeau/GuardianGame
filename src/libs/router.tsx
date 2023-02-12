@@ -17,6 +17,7 @@ export const router = createBrowserRouter([
         <LoginView />
       </App>
     ),
+
     errorElement: <ErrorView title="Error" message="Undefined path" />,
   },
   {
@@ -52,7 +53,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/character/:id",
+    path: "/character/:charId",
     element: (
       <App>
         <CharacterView />
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthHandler />,
+    element: (
+      <App>
+        <AuthHandler />
+      </App>
+    ),
   },
 ])

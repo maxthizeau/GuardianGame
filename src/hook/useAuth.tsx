@@ -1,8 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from "react"
-import { LOCAL_KEY_twitchAccessToken, LOCAL_KEY_uuid } from "../libs/constants"
+import { LOCAL_KEY_twitchAccessToken, LOCAL_KEY_uuid, GUEST_ACCESS_TOKEN } from "../libs/constants"
 import { fetchUser, profileActions } from "../redux/slices/profileSlice"
 import { useAppDispatch, useAppSelector } from "../redux/store"
 import { uuid } from "../utils/utils"
+import { useNavigate } from "react-router-dom"
 const clientId = import.meta.env.VITE_TWITCH_SECRET_TOKEN
 const frontUrl = import.meta.env.PROD ? import.meta.env.VITE_FRONTURL : "http://localhost:5173/"
 
@@ -39,7 +40,12 @@ const useAuth = () => {
     dispatch(profileActions.logout())
   }
 
-  const handleOAuthTwitch = () => {
+  const handleOAuthTwitch = (asGuest?: boolean) => {
+    if (asGuest) {
+      setAccessToken(GUEST_ACCESS_TOKEN)
+      window.location.href = "/heroes"
+      return
+    }
     const stateString = uuid()
     setUuidState(stateString)
     const responseType = "token"

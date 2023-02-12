@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { useAppSelector } from "../redux/store"
 import GameHeader from "../components/GameHeader"
-import { Item, ItemType, Statistic } from "../data/types"
+import { Character, Item, ItemType, Statistic } from "../data/types"
 import Divider from "../components/UIKit/Divider"
 import MainLayout from "../layouts/MainLayout"
 import { MAX_ITEM_COUNT_PER_CHAR } from "../libs/constants"
@@ -13,17 +13,18 @@ import StatisticTable from "../components/StatisticTable"
 import SkillBox from "../components/SkillBox"
 import InventoryListSelector from "../components/InventoryListSelector"
 import { usePreview } from "../hook/usePreview"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 interface IProps {
   // children: ReactNode
 }
 
 const CharacterView: FC<IProps> = ({}) => {
+  const { charId } = useParams()
   const { setOnClickOnHoverPreview } = usePreview()
   const userItems = useAppSelector((state) => state.inventory.items)
-  const characters = useAppSelector((state) => state.inventory.characters)
-  const character = characters[0]
+  const [character, setCharacter] = useState<Character | undefined>()
+  const userCharacters = useAppSelector((state) => state.inventory.characters)
   const navigate = useNavigate()
   const [equipedItems, setEquipedItems] = useState<(Item | undefined)[]>([])
   const [characterFullStatistics, setCharacterFullStatistics] = useState<Statistic>({
@@ -31,6 +32,13 @@ const CharacterView: FC<IProps> = ({}) => {
     intelligence: 0,
     strength: 0,
   })
+
+  useEffect(() => {
+    console.log(charId)
+    if (charId) {
+      setCharacter(userCharacters.find((x) => x.inventoryId == parseInt(charId)))
+    }
+  }, [charId, userCharacters])
 
   useEffect(() => {
     // Update equipedItems state

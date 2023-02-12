@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
+import { GUEST_ACCESS_TOKEN, GUEST_TWITCH_ID } from "../../libs/constants"
 const clientId = import.meta.env.VITE_TWITCH_SECRET_TOKEN
 
 // not used
@@ -19,7 +20,12 @@ interface IProfileState {
 const twitchAccessToken = localStorage.getItem("twitchAccessToken") ?? undefined
 
 export const fetchUser = createAsyncThunk("profile/fetchUser", (token?: string) => {
+  // Prioritize props token, then localstorage, except if localstorage token is guest
+
   let finalToken = token ?? localStorage.getItem("twitchAccessToken") ?? undefined
+  if (localStorage.getItem("twitchAccessToken") == GUEST_ACCESS_TOKEN) {
+    return { userId: GUEST_TWITCH_ID, displayName: "Guest", accessToken: GUEST_ACCESS_TOKEN }
+  }
 
   if (!finalToken) {
     throw Error("No token to fetch")
@@ -55,6 +61,9 @@ const profileSlice = createSlice({
     },
     logout: (state) => {
       return initialState
+    },
+    loginGuest: (state) => {
+      ;(state.name = "Guest"), (state.accessToken = GUEST_ACCESS_TOKEN), (state.twitchId = GUEST_TWITCH_ID)
     },
   },
   extraReducers: (builder) => {

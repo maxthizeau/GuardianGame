@@ -44,7 +44,7 @@ const CharacterPreview: FC<IProps> = ({ character }) => {
             <button onClick={() => dispatch(inventoryActions.selectCharacter({ inventoryId: character.inventoryId }))}>
               <span className="intensify-red">Remove from team</span>
             </button>
-            <button onClick={() => navigate("/character/1")}>
+            <button onClick={() => navigate(`/character/${character.inventoryId}`)}>
               <span>Details</span>
             </button>
           </>

@@ -5,6 +5,7 @@ import { inventoryActions } from "../slices/inventorySlice"
 import axios from "axios"
 import { fetchUser } from "../slices/profileSlice"
 import { delay } from "../../utils/utils"
+import { GUEST_ACCESS_TOKEN, GUEST_TWITCH_ID } from "../../libs/constants"
 
 const initStateWithLoggedUser = {
   profile: {
@@ -73,5 +74,18 @@ describe("saveMiddleware - Redux Middleware", () => {
     await delay(500)
 
     expect(store.getState().inventory).toMatchObject(stateReturnedByMockSave)
+  })
+  it("should not save the state when logged in as guest", async () => {
+    const spyPost = vi.spyOn(axios, "post")
+    const store = setupStore({
+      profile: {
+        name: "Guest",
+        accessToken: GUEST_ACCESS_TOKEN,
+        twitchId: GUEST_TWITCH_ID,
+      },
+    })
+
+    await store.dispatch(inventoryActions.earnMoney(300))
+    expect(spyPost).not.toHaveBeenCalled()
   })
 })

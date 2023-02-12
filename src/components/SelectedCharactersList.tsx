@@ -30,7 +30,7 @@ const SelectedCharactersList: FC<IProps> = ({ characterType, charactersArray }) 
             ? {
                 item: { type: "character", item: item },
                 onClickAgain: () => {
-                  navigate("/character/1")
+                  navigate(`/character/${item.inventoryId}`)
                 },
               }
             : {
